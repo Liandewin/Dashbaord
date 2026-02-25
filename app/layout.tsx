@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Grainient from "@/components/Grainient";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="relative min-h-screen overflow-hidden">
+          <div className="absolute inset-0 -z-10">
+            <Grainient color1="#000000" color2="#307ffd" color3="#76dff9" />
+          </div>
+          {children}
+        </div>
       </body>
     </html>
   );
