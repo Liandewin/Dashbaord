@@ -1,5 +1,5 @@
-export default function Journal() {
-    return (
-        <div>Journal Page</div>
-    )
+import JournalClient from '@/components/journal/journal-client'
+
+export default function JournalPage() {
+    return <JournalClient />
 }

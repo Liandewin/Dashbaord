@@ -1,5 +1,5 @@
-export default function Prayer() {
-    return (
-        <div>Prayer Page</div>
-    )
+import PrayerLogClient from '@/components/prayer-log/prayer-log-client'
+
+export default function PrayerLogPage() {
+    return <PrayerLogClient />
 }
