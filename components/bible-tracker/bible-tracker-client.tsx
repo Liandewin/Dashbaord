@@ -155,7 +155,7 @@ export default function BibleTrackerPage() {
             <StatsCards readings={readings} loading={loading} />
 
             {/* Chart + Recent */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 16 }}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <ProgressChart readings={readings} />
                 <RecentReadings readings={readings} loading={loading} onDelete={handleDelete} />
             </div>

@@ -72,7 +72,6 @@ const data = {
       icon: Send,
     },
   ],
-
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

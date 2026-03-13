@@ -70,7 +70,7 @@ export default function StatsCards({ readings, loading }: Props) {
     ]
 
     return (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 24 }}>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             {cards.map((card, i) => (
                 <div key={i} className={card.gold ? 'gold-card' : 'glass-card'} style={{ padding: 20 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>

@@ -193,7 +193,7 @@ export default function GoalsClient() {
             {loading ? (
                 <p style={{ color: 'rgba(255,255,255,0.3)' }}>Loading...</p>
             ) : (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                     {STATUSES.map(col => {
                         const colGoals = goals.filter(g => g.status === col.key)
                         const grouped = CATEGORIES.reduce((acc, cat) => {
