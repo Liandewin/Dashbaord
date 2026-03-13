@@ -1,5 +1,5 @@
-export default function Fitness() {
-    return (
-        <div>Fitness Page</div>
-    )
+import FitnessClient from '@/components/fitness/fitness-client'
+
+export default function FitnessPage() {
+    return <FitnessClient />
 }
