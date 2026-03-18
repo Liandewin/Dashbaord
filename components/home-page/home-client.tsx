@@ -2,6 +2,7 @@
 
 import VerseOfTheDay from './verse-of-the-day'
 import SummaryCards from './summary-cards'
+import MonthlyReviewModal from '@/components/monthly-review/monthly-review-modal'
 
 interface Props {
     firstName: string
@@ -34,6 +35,7 @@ export default function HomeClient({ firstName }: Props) {
 
             <VerseOfTheDay />
             <SummaryCards />
+            <MonthlyReviewModal />
         </div>
     )
 }
