@@ -19,9 +19,10 @@ function getTier(score: number) {
 
 async function buildAndSend(supabase: any, profileId: string, email: string, firstName: string) {
     const now = new Date()
-    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0]
-    const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate()
-    const monthName = now.toLocaleString('default', { month: 'long' })
+    const prev = new Date(now.getFullYear(), now.getMonth() - 1, 1)
+    const monthStart = prev.toISOString().split('T')[0]
+    const daysInMonth = new Date(prev.getFullYear(), prev.getMonth() + 1, 0).getDate()
+    const monthName = prev.toLocaleString('default', { month: 'long' })
 
     const [bible, goals, fitness] = await Promise.all([
         supabase.from('bible_readings').select('id').gte('date', monthStart).eq('user_id', profileId),
