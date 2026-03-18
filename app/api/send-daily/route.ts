@@ -1,14 +1,18 @@
 import { Resend } from 'resend'
 import { createSupabaseServerClient } from '@/lib/supabase-server'
-import { NextResponse } from 'next/server'
+import { NextResponse, NextRequest } from 'next/server'
 import DailyCheckinEmail from '@/app/email/daily-checkin'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+    const authHeader = request.headers.get('authorization')
+    if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     const supabase = await createSupabaseServerClient()
 
-    // Get all users from profiles
     const { data: profiles, error } = await supabase
         .from('profiles')
         .select('id, first_name, email')
@@ -17,14 +21,12 @@ export async function GET() {
         return NextResponse.json({ error: 'Failed to fetch profiles' }, { status: 500 })
     }
 
-    // Get today's verse
     const { data: verses } = await supabase.from('verses').select('*')
     const dayOfYear = Math.floor(
         (new Date().getTime() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000
     )
     const verse = verses?.[dayOfYear % (verses?.length || 1)]
 
-    // Send email to each user
     const results = await Promise.all(
         profiles.map(profile =>
             resend.emails.send({
