@@ -27,7 +27,7 @@ export default function SummaryCards() {
             const startOfWeekStr = startOfWeek.toISOString().split('T')[0]
 
             const [bible, prayers, journal, goals, fitness] = await Promise.all([
-                supabase.from('bible_readings').select('*').order('date', { ascending: false }),
+                supabase.from('bible_reading').select('*').order('date', { ascending: false }),
                 supabase.from('prayer_log').select('*'),
                 supabase.from('journal').select('title, date').order('date', { ascending: false }).limit(1),
                 supabase.from('goals').select('status'),
