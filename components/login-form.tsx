@@ -101,6 +101,7 @@ export function LoginForm({
 
   return (
     <>
+
       {toast && <Toast message={toast.message} type={toast.type} />}
 
       <div className={cn("flex flex-col gap-6", className)} {...props}>
