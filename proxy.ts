@@ -34,6 +34,8 @@ export async function proxy(request: NextRequest) {
   if (
     !user &&
     !pathname.startsWith('/login') &&
+    !pathname.startsWith('/forgot-password') &&
+    !pathname.startsWith('/reset-password') &&
     !pathname.startsWith('/api/') &&
     pathname !== '/'
   ) {

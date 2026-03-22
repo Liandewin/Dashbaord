@@ -9,67 +9,90 @@ export default function ForgotPasswordPage() {
     const supabase = createSupabaseBrowserClient()
     const [email, setEmail] = useState('')
     const [submitted, setSubmitted] = useState(false)
-    const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
 
     async function handleSubmit() {
-        setError('')
         setLoading(true)
-
-        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        await supabase.auth.resetPasswordForEmail(email, {
             redirectTo: `${window.location.origin}/reset-password`,
         })
-
-        if (error) {
-            setError(error.message)
-        } else {
-            setSubmitted(true)
-        }
+        // Always show success regardless of whether email exists
+        setSubmitted(true)
         setLoading(false)
     }
 
     return (
-        <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
-            <Link href="/login" className="absolute top-6 left-6 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+        <div className="flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10" style={{ background: '#0a0a0f' }}>
+            <Link href="/login" className="absolute top-6 left-6 flex items-center gap-2 text-sm transition-colors" style={{ color: 'rgba(255,255,255,0.4)' }}>
                 <ArrowLeft className="size-4" />
                 Back to login
             </Link>
 
             <div className="w-full max-w-sm">
-                <div className="rounded-xl border bg-card p-8 shadow-sm flex flex-col gap-6">
-                    <div className="text-center">
-                        <h1 className="text-xl font-semibold">Reset your password</h1>
-                        <p className="text-sm text-muted-foreground mt-1">
+                <div style={{
+                    background: 'rgba(255,255,255,0.04)',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    borderRadius: 16,
+                    padding: 32,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 24,
+                }}>
+                    <div style={{ textAlign: 'center' }}>
+                        <p style={{ fontSize: 12, color: '#d4af37', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 8 }}>
+                            Password Reset
+                        </p>
+                        <h1 style={{ fontSize: 24, fontWeight: 700, color: 'white', margin: '0 0 8px' }}>
+                            {submitted ? 'Check your email' : 'Reset your password'}
+                        </h1>
+                        <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', margin: 0 }}>
                             {submitted
-                                ? 'Check your email for a reset link'
-                                : "Enter your email and we'll send you a link"}
+                                ? "If an account exists with that email, you'll receive a reset link shortly."
+                                : "Enter your email and we'll send you a reset link"
+                            }
                         </p>
                     </div>
 
                     {!submitted ? (
-                        <div className="flex flex-col gap-4">
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                             <input
                                 type="email"
                                 placeholder="m@example.com"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
-                                className="h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                                style={{
+                                    height: 40, width: '100%', borderRadius: 10,
+                                    background: 'rgba(255,255,255,0.06)',
+                                    border: '1px solid rgba(255,255,255,0.1)',
+                                    color: 'white', fontSize: 14, padding: '0 14px',
+                                    outline: 'none', boxSizing: 'border-box',
+                                }}
                             />
-                            {error && <p className="text-sm text-red-500 text-center">{error}</p>}
                             <button
                                 onClick={handleSubmit}
                                 disabled={loading || !email}
-                                className="h-9 w-full rounded-md bg-primary text-primary-foreground text-sm font-medium disabled:opacity-50 transition-all hover:bg-primary/90"
+                                style={{
+                                    height: 40, width: '100%', borderRadius: 10,
+                                    background: 'linear-gradient(135deg, #d4af37, #b8962e)',
+                                    color: '#0a0a0f', fontSize: 14, fontWeight: 600,
+                                    border: 'none', cursor: 'pointer',
+                                    opacity: loading || !email ? 0.5 : 1,
+                                }}
                             >
-                                {loading ? 'Sending...' : 'Send reset link'}
+                                {loading ? 'Sending...' : 'Send Reset Link'}
                             </button>
                         </div>
                     ) : (
-                        <div className="text-center">
-                            <p className="text-4xl mb-4">📬</p>
-                            <p className="text-sm text-muted-foreground">
-                                We sent a link to <span className="text-foreground font-medium">{email}</span>. Click it to set a new password.
-                            </p>
+                        <div style={{ textAlign: 'center' }}>
+                            <p style={{ fontSize: 40, marginBottom: 16 }}>📬</p>
+                            <Link href="/login" style={{
+                                display: 'inline-block', marginTop: 8,
+                                fontSize: 14, color: '#d4af37',
+                                textDecoration: 'underline',
+                                textUnderlineOffset: 4,
+                            }}>
+                                Back to login
+                            </Link>
                         </div>
                     )}
                 </div>
