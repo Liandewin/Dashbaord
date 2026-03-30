@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
             const workoutMinutes = (fitness.data || []).reduce((acc: number, e: any) => acc + e.duration, 0)
 
             return resend.emails.send({
-                from: 'Faith & Growth Tracker <onboarding@resend.dev>',
+                from: 'Faith & Growth Tracker <noreply@faith-growth-tracker.co.za>',
                 to: profile.email,
                 subject: '📊 Your weekly growth summary',
                 react: WeeklySummaryEmail({

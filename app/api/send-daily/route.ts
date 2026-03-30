@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
     const results = await Promise.all(
         profiles.map(profile =>
             resend.emails.send({
-                from: 'Faith & Growth Tracker <onboarding@resend.dev>',
+                from: 'Faith & Growth Tracker <noreply@faith-growth-tracker.co.za>',
                 to: profile.email,
                 subject: '🌅 Your daily check-in',
                 react: DailyCheckinEmail({

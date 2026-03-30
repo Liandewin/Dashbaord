@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
 
     // Email notification to you
     await resend.emails.send({
-    from: 'Faith & Growth Tracker <onboarding@resend.dev>',
+    from: 'Faith & Growth Tracker <noreply@faith-growth-tracker.co.za>',
     to: user.email!,
     subject: '💬 New Feedback Received',
     react: FeedbackNotificationEmail({ name, message }),

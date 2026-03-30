@@ -42,7 +42,7 @@ async function buildAndSend(supabase: any, profileId: string, email: string, fir
     const tier = getTier(overallScore)
 
     return resend.emails.send({
-        from: 'Faith & Growth Tracker <onboarding@resend.dev>',
+        from: 'Faith & Growth Tracker <noreply@faith-growth-tracker.co.za>',
         to: email,
         subject: `${tier.emoji} Your ${monthName} review — ${tier.label}`,
         react: MonthlyReviewEmail({
