@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
 
@@ -25,9 +25,26 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Faith & Growth Tracker",
-  description: "This is a webiste to help men grow and reach there goals in life.",
+  title: {
+    template: "%s | Faith & Growth Tracker",
+    default: "Faith & Growth Tracker",
+  },
+  description: "A personal discipline dashboard for tracking faith, goals, and growth.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+  openGraph: {
+    title: "Faith & Growth Tracker",
+    description: "A personal discipline dashboard for tracking faith, goals, and growth.",
+    type: "website",
+    locale: "en_ZA",
+  },
 };
+
+export const viewport: Viewport = {
+  themeColor: "#d4af37",
+}
 
 export default function RootLayout({
   children,
