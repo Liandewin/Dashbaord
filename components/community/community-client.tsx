@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { createSupabaseBrowserClient } from '@/lib/supabase-browser'
+import CommunitySkeleton from './community-skeleton'
 
 type Post = {
     id: string
@@ -335,7 +336,7 @@ export default function CommunityClient() {
 
                 {/* Feed */}
                 {loading ? (
-                    <p style={{ color: 'rgba(255,255,255,0.3)', textAlign: 'center', paddingTop: 60, fontSize: 15 }}>Loading...</p>
+                    <CommunitySkeleton />
                 ) : posts.length === 0 ? (
                     <div style={{ textAlign: 'center', paddingTop: 80 }}>
                         <p style={{ fontSize: 40, marginBottom: 12 }}>🌿</p>
