@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { createSupabaseBrowserClient } from '@/lib/supabase-browser'
 import { Goal } from './types'
+import GoalsSkeleton from './goals-skeleton'
 
 const CATEGORIES = ['Spiritual', 'Financial', 'Health', 'Relationships', 'Personal', 'Career']
 
@@ -191,7 +192,7 @@ export default function GoalsClient() {
 
             {/* Kanban */}
             {loading ? (
-                <p style={{ color: 'rgba(255,255,255,0.3)' }}>Loading...</p>
+                <GoalsSkeleton />
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                     {STATUSES.map(col => {
