@@ -11,6 +11,7 @@ import {
   Send,
   CheckCheck,
   House,
+  Users
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -57,6 +58,11 @@ const data = {
       title: "Fitness",
       url: "/dashboard/fitness",
       icon: Dumbbell,
+    },
+    {
+      title: "Community",
+      url: "/dashboard/community",
+      icon: Users,
     },
   ],
   navSecondary: [
