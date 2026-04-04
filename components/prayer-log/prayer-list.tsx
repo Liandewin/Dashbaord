@@ -36,8 +36,8 @@ export default function PrayerList({ prayers, loading, onDelete, onToggleAnswere
 
     return (
         <div style={{
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: 'var(--card-bg)',
+            border: '1px solid var(--border-default)',
             borderRadius: 16,
             padding: 24,
         }}>
@@ -46,11 +46,11 @@ export default function PrayerList({ prayers, loading, onDelete, onToggleAnswere
             </h3>
 
             {loading ? (
-                <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 14 }}>Loading...</p>
+                <p style={{ color: 'var(--text-dim)', fontSize: 14 }}>Loading...</p>
             ) : prayers.length === 0 ? (
                 <div style={{ textAlign: 'center', padding: '40px 0' }}>
                     <p style={{ fontSize: 32, marginBottom: 8 }}>🙏</p>
-                    <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 14 }}>No prayers yet. Log your first one!</p>
+                    <p style={{ color: 'var(--text-dim)', fontSize: 14 }}>No prayers yet. Log your first one!</p>
                 </div>
             ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -61,8 +61,8 @@ export default function PrayerList({ prayers, loading, onDelete, onToggleAnswere
                             gap: 14,
                             padding: 16,
                             borderRadius: 12,
-                            background: 'rgba(255,255,255,0.03)',
-                            border: '1px solid rgba(255,255,255,0.06)',
+                            background: 'var(--card-bg-subtle)',
+                            border: '1px solid var(--border-subtle)',
                             transition: 'all 0.2s',
                         }}>
                             <button
@@ -70,8 +70,8 @@ export default function PrayerList({ prayers, loading, onDelete, onToggleAnswere
                                 title={p.answered ? 'Mark as unanswered' : 'Mark as answered'}
                                 style={{
                                     width: 36, height: 36, borderRadius: 10, flexShrink: 0,
-                                    background: p.answered ? 'rgba(212,175,55,0.15)' : 'rgba(255,255,255,0.05)',
-                                    border: p.answered ? '1px solid rgba(212,175,55,0.3)' : '1px solid rgba(255,255,255,0.08)',
+                                    background: p.answered ? 'var(--gold-bg-medium)' : 'var(--card-bg-hover)',
+                                    border: p.answered ? '1px solid var(--gold-border)' : '1px solid var(--border-default)',
                                     cursor: 'pointer', fontSize: 16, display: 'flex',
                                     alignItems: 'center', justifyContent: 'center',
                                 }}
@@ -81,20 +81,20 @@ export default function PrayerList({ prayers, loading, onDelete, onToggleAnswere
 
                             <div style={{ flex: 1, minWidth: 0 }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-                                    <span style={{ fontWeight: 600, fontSize: 15, color: p.answered ? '#d4af37' : 'white' }}>
+                                    <span style={{ fontWeight: 600, fontSize: 15, color: p.answered ? 'var(--app-gold)' : 'var(--app-text)' }}>
                                         {p.title}
                                     </span>
-                                    <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', flexShrink: 0, marginLeft: 12 }}>
+                                    <span style={{ fontSize: 12, color: 'var(--text-dim)', flexShrink: 0, marginLeft: 12 }}>
                                         {formatDate(p.date)}
                                     </span>
                                 </div>
                                 {p.body && (
-                                    <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', margin: 0, lineHeight: 1.5 }}>
+                                    <p style={{ fontSize: 13, color: 'var(--app-text-muted)', margin: 0, lineHeight: 1.5 }}>
                                         {p.body}
                                     </p>
                                 )}
                                 {p.answered && (
-                                    <span style={{ fontSize: 11, color: '#d4af37', marginTop: 4, display: 'inline-block' }}>
+                                    <span style={{ fontSize: 11, color: 'var(--app-gold)', marginTop: 4, display: 'inline-block' }}>
                                         ✨ Answered
                                     </span>
                                 )}
@@ -104,12 +104,12 @@ export default function PrayerList({ prayers, loading, onDelete, onToggleAnswere
                                 onClick={() => handleDelete(p.id)}
                                 style={{
                                     background: 'transparent', border: 'none',
-                                    color: 'rgba(255,255,255,0.2)', cursor: 'pointer',
+                                    color: 'var(--text-faint)', cursor: 'pointer',
                                     fontSize: 14, padding: 4, flexShrink: 0,
                                     transition: 'color 0.2s',
                                 }}
                                 onMouseEnter={e => (e.currentTarget.style.color = '#ef4444')}
-                                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.2)')}
+                                onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-faint)')}
                             >
                                 ✕
                             </button>

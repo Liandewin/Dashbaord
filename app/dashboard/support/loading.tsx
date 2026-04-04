@@ -1,30 +1,12 @@
 export default function SupportLoading() {
     return (
-        <div style={{
+        <div className="page-padding" style={{
             minHeight: '100vh',
-            background: '#0a0a0f',
-            padding: '32px',
-            fontFamily: "'DM Sans', sans-serif",
-            color: 'white',
-        }}>
-            <style>{`
-        @keyframes shimmer {
-          0% { background-position: -1000px 0; }
-          100% { background-position: 1000px 0; }
-        }
-        .skeleton {
-          background: linear-gradient(
-            90deg,
-            rgba(255,255,255,0.04) 25%,
-            rgba(255,255,255,0.08) 50%,
-            rgba(255,255,255,0.04) 75%
-          );
-          background-size: 1000px 100%;
-          animation: shimmer 2s infinite;
-          border-radius: 8px;
-        }
-      `}</style>
+            background: 'var(--app-bg)',
 
+            fontFamily: "'DM Sans', sans-serif",
+            color: 'var(--app-text)',
+        }}>
             {/* Header */}
             <div style={{ marginBottom: 40 }}>
                 <div className="skeleton" style={{ height: 50, width: 340, marginBottom: 10 }} />
@@ -37,8 +19,8 @@ export default function SupportLoading() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                     {[...Array(4)].map((_, i) => (
                         <div key={i} style={{
-                            background: 'rgba(255,255,255,0.04)',
-                            border: '1px solid rgba(255,255,255,0.08)',
+                            background: 'var(--card-bg)',
+                            border: '1px solid var(--border-default)',
                             borderRadius: 12, padding: '16px 20px',
                         }}>
                             <div className="skeleton" style={{ height: 15, width: `${50 + i * 10}%` }} />
@@ -51,8 +33,8 @@ export default function SupportLoading() {
             <div style={{ maxWidth: 640 }}>
                 <div className="skeleton" style={{ height: 11, width: 110, marginBottom: 16 }} />
                 <div style={{
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.08)',
+                    background: 'var(--card-bg)',
+                    border: '1px solid var(--border-default)',
                     borderRadius: 16, padding: 32,
                     display: 'flex', flexDirection: 'column', gap: 20,
                 }}>

@@ -61,11 +61,11 @@ export default function LogReadingForm({ onSave, onCancel }: Props) {
 
     return (
         <div className="glass-card" style={{ padding: 24, marginBottom: 28 }}>
-            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 22, margin: '0 0 20px', color: '#d4af37' }}>
+            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 22, margin: '0 0 20px', color: 'var(--app-gold)' }}>
                 Log New Reading
             </h3>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 12, marginBottom: 12 }}>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
                 <div>
                     <label className="form-label">Book</label>
                     <select
@@ -111,12 +111,12 @@ export default function LogReadingForm({ onSave, onCancel }: Props) {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'rgba(255,255,255,0.6)', cursor: 'pointer' }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: 'var(--text-soft)', cursor: 'pointer' }}>
                     <input
                         type="checkbox"
                         checked={form.completed}
                         onChange={e => setForm(f => ({ ...f, completed: e.target.checked }))}
-                        style={{ accentColor: '#d4af37', width: 16, height: 16 }}
+                        style={{ accentColor: 'var(--app-gold)', width: 16, height: 16 }}
                     />
                     Mark as completed
                 </label>

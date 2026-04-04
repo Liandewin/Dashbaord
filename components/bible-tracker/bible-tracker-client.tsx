@@ -38,31 +38,30 @@ export default function BibleTrackerPage() {
     }
 
     return (
-        <div style={{
+        <div className="page-padding" style={{
             minHeight: '100vh',
-            background: '#0a0a0f',
-            padding: '32px',
+            background: 'var(--app-bg)',
+
             fontFamily: "'DM Sans', sans-serif",
-            color: 'white',
+            color: 'var(--app-text)',
         }}>
             <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
         .glass-card {
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.08);
+          background: var(--card-bg);
+          border: 1px solid var(--border-default);
           border-radius: 16px;
           backdrop-filter: blur(12px);
           transition: all 0.3s ease;
         }
-        .glass-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(212,175,55,0.2); }
+        .glass-card:hover { background: var(--card-bg-hover); border-color: var(--gold-border-faint); }
         .gold-card {
-          background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(212,175,55,0.04));
-          border: 1px solid rgba(212,175,55,0.25);
+          background: linear-gradient(135deg, var(--gold-bg-subtle), var(--gold-card-bg));
+          border: 1px solid var(--gold-border-subtle);
           border-radius: 16px;
         }
         .btn-gold {
-          background: linear-gradient(135deg, #d4af37, #b8962e);
-          color: #0a0a0f;
+          background: linear-gradient(135deg, var(--app-gold), #b8962e);
+          color: var(--app-bg);
           border: none;
           border-radius: 10px;
           padding: 10px 20px;
@@ -71,13 +70,13 @@ export default function BibleTrackerPage() {
           cursor: pointer;
           font-family: 'DM Sans', sans-serif;
           transition: all 0.3s ease;
-          box-shadow: 0 0 20px rgba(212,175,55,0.2);
+          box-shadow: 0 0 20px var(--gold-bg-strong);
         }
-        .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 0 30px rgba(212,175,55,0.35); }
+        .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 0 30px var(--gold-bg-strong); }
         .btn-ghost {
           background: transparent;
-          color: rgba(255,255,255,0.5);
-          border: 1px solid rgba(255,255,255,0.1);
+          color: var(--text-soft);
+          border: 1px solid var(--border-medium);
           border-radius: 10px;
           padding: 10px 20px;
           font-size: 14px;
@@ -85,44 +84,44 @@ export default function BibleTrackerPage() {
           font-family: 'DM Sans', sans-serif;
           transition: all 0.2s;
         }
-        .btn-ghost:hover { border-color: rgba(212,175,55,0.3); color: #d4af37; }
+        .btn-ghost:hover { border-color: var(--gold-border); color: var(--app-gold); }
         .form-label {
           font-size: 12px;
-          color: rgba(255,255,255,0.4);
+          color: var(--app-text-muted);
           display: block;
           margin-bottom: 6px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
         }
         .form-input {
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(255,255,255,0.1);
+          background: var(--card-bg-hover);
+          border: 1px solid var(--border-medium);
           border-radius: 10px;
           padding: 10px 14px;
-          color: white;
+          color: var(--app-text);
           font-family: 'DM Sans', sans-serif;
           font-size: 14px;
           width: 100%;
           outline: none;
           transition: border-color 0.2s;
         }
-        .form-input:focus { border-color: rgba(212,175,55,0.5); }
-        .form-input option { background: #1a1a2e; }
+        .form-input:focus { border-color: var(--gold-border); }
+        .form-input option { background: var(--app-bg); }
         .reading-row {
           display: flex;
           align-items: center;
           gap: 12px;
           padding: 12px;
           border-radius: 12px;
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.06);
+          background: var(--card-bg-subtle);
+          border: 1px solid var(--border-subtle);
           transition: all 0.2s;
         }
-        .reading-row:hover { background: rgba(255,255,255,0.06); border-color: rgba(212,175,55,0.15); }
+        .reading-row:hover { background: var(--card-bg-hover); border-color: var(--gold-bg-medium); }
         .delete-btn {
           background: transparent;
           border: none;
-          color: rgba(255,255,255,0.2);
+          color: var(--text-faint);
           cursor: pointer;
           font-size: 14px;
           padding: 4px;

@@ -28,24 +28,24 @@ export default function FitnessStatsCards({ entries, loading }: Props) {
     ]
 
     return (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 24 }}>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             {cards.map((card, i) => (
                 <div key={i} style={{
-                    background: card.gold ? 'rgba(212,175,55,0.08)' : 'rgba(255,255,255,0.04)',
-                    border: `1px solid ${card.gold ? 'rgba(212,175,55,0.25)' : 'rgba(255,255,255,0.08)'}`,
+                    background: card.gold ? 'var(--gold-card-bg)' : 'var(--card-bg)',
+                    border: `1px solid ${card.gold ? 'var(--gold-border-subtle)' : 'var(--border-default)'}`,
                     borderRadius: 16,
                     padding: 20,
                 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
-                        <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        <span style={{ fontSize: 12, color: 'var(--app-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                             {card.label}
                         </span>
                         <span style={{ fontSize: 20 }}>{card.icon}</span>
                     </div>
-                    <div style={{ fontSize: 32, fontWeight: 700, color: card.gold ? '#d4af37' : 'white', marginBottom: 4 }}>
+                    <div style={{ fontSize: 32, fontWeight: 700, color: card.gold ? 'var(--app-gold)' : 'var(--app-text)', marginBottom: 4 }}>
                         {loading ? '—' : card.value}
                     </div>
-                    <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>{card.sub}</div>
+                    <div style={{ fontSize: 12, color: 'var(--text-dim)' }}>{card.sub}</div>
                 </div>
             ))}
         </div>

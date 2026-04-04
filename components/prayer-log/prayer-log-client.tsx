@@ -40,19 +40,18 @@ export default function PrayerLogClient() {
     }
 
     return (
-        <div style={{
+        <div className="page-padding" style={{
             minHeight: '100vh',
-            background: '#0a0a0f',
-            padding: '32px',
+            background: 'var(--app-bg)',
+
             fontFamily: "'DM Sans', sans-serif",
-            color: 'white',
+            color: 'var(--app-text)',
         }}>
             <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
                 .btn-gold {
-                    background: rgba(212,175,55,0.15);
-                    border: 1px solid rgba(212,175,55,0.3);
-                    color: #d4af37;
+                    background: var(--gold-bg-medium);
+                    border: 1px solid var(--gold-border);
+                    color: var(--app-gold);
                     padding: 10px 20px;
                     border-radius: 10px;
                     font-size: 14px;
@@ -61,8 +60,8 @@ export default function PrayerLogClient() {
                     transition: all 0.2s;
                 }
                 .btn-gold:hover {
-                    background: rgba(212,175,55,0.25);
-                    border-color: rgba(212,175,55,0.5);
+                    background: var(--gold-bg-strong);
+                    border-color: var(--gold-border);
                 }
             `}</style>
 
@@ -70,11 +69,11 @@ export default function PrayerLogClient() {
                 <div>
                     <h1 style={{
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: 42, fontWeight: 700, margin: 0, lineHeight: 1.1, color: 'white',
+                        fontSize: 42, fontWeight: 700, margin: 0, lineHeight: 1.1, color: 'var(--app-text)',
                     }}>
-                        Prayer <span style={{ color: '#d4af37' }}>Log</span>
+                        Prayer <span style={{ color: 'var(--app-gold)' }}>Log</span>
                     </h1>
-                    <p style={{ color: 'rgba(255,255,255,0.4)', marginTop: 6, fontSize: 14 }}>
+                    <p style={{ color: 'var(--app-text-muted)', marginTop: 6, fontSize: 14 }}>
                         Track your prayers and celebrate answered ones
                     </p>
                 </div>

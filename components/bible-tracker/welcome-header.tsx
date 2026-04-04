@@ -25,11 +25,11 @@ export async function WelcomeHeader() {
                 fontWeight: 700,
                 margin: 0,
                 lineHeight: 1.1,
-                color: 'white',
+                color: 'var(--app-text)',
             }}>
-                Welcome back, <span style={{ color: '#d4af37', textTransform: 'capitalize' }}>{firstName}</span> 🙏
+                Welcome back, <span style={{ color: 'var(--app-gold)', textTransform: 'capitalize' }}>{firstName}</span> 🙏
             </h1>
-            <p style={{ color: 'rgba(255,255,255,0.4)', marginTop: 6, fontSize: 14 }}>
+            <p style={{ color: 'var(--app-text-muted)', marginTop: 6, fontSize: 14 }}>
                 Here's your scripture journey at a glance
             </p>
         </div>

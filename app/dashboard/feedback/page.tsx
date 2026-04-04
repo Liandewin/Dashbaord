@@ -30,34 +30,30 @@ export default function FeedbackPage() {
     }
 
     return (
-        <div style={{
+        <div className="page-padding" style={{
             minHeight: '100vh',
-            background: '#0a0a0f',
-            padding: '32px',
-            fontFamily: "'DM Sans', sans-serif",
-            color: 'white',
-        }}>
-            <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
-            `}</style>
+            background: 'var(--app-bg)',
 
+            fontFamily: "'DM Sans', sans-serif",
+            color: 'var(--app-text)',
+        }}>
             {/* Header */}
             <div style={{ marginBottom: 32 }}>
                 <h1 style={{
                     fontFamily: "'Cormorant Garamond', serif",
                     fontSize: 42, fontWeight: 700, margin: 0, lineHeight: 1.1,
                 }}>
-                    Share your <span style={{ color: '#d4af37' }}>Feedback</span>
+                    Share your <span style={{ color: 'var(--app-gold)' }}>Feedback</span>
                 </h1>
-                <p style={{ color: 'rgba(255,255,255,0.4)', marginTop: 6, fontSize: 14 }}>
+                <p style={{ color: 'var(--app-text-muted)', marginTop: 6, fontSize: 14 }}>
                     Help us improve the app — every message is read personally
                 </p>
             </div>
 
             {submitted ? (
                 <div style={{
-                    background: 'rgba(212,175,55,0.08)',
-                    border: '1px solid rgba(212,175,55,0.25)',
+                    background: 'var(--gold-bg-subtle)',
+                    border: '1px solid var(--gold-border-subtle)',
                     borderRadius: 16, padding: 40,
                     textAlign: 'center', maxWidth: 520,
                 }}>
@@ -65,20 +61,20 @@ export default function FeedbackPage() {
                     <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, margin: '0 0 8px' }}>
                         Thank you!
                     </h2>
-                    <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 14, margin: 0 }}>
+                    <p style={{ color: 'var(--app-text-muted)', fontSize: 14, margin: 0 }}>
                         Your feedback has been received. We appreciate you taking the time.
                     </p>
                 </div>
             ) : (
                 <div style={{
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.08)',
+                    background: 'var(--card-bg)',
+                    border: '1px solid var(--border-default)',
                     borderRadius: 16, padding: 32,
                     maxWidth: 520,
                     display: 'flex', flexDirection: 'column', gap: 20,
                 }}>
                     <div>
-                        <label style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 8 }}>
+                        <label style={{ fontSize: 12, color: 'var(--app-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 8 }}>
                             Your Name
                         </label>
                         <input
@@ -88,14 +84,14 @@ export default function FeedbackPage() {
                             onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                             style={{
                                 width: '100%', padding: '10px 14px', borderRadius: 10,
-                                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
-                                color: 'white', fontSize: 14, outline: 'none', boxSizing: 'border-box',
+                                background: 'var(--card-bg-hover)', border: '1px solid var(--border-medium)',
+                                color: 'var(--app-text)', fontSize: 14, outline: 'none', boxSizing: 'border-box',
                             }}
                         />
                     </div>
 
                     <div>
-                        <label style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 8 }}>
+                        <label style={{ fontSize: 12, color: 'var(--app-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 8 }}>
                             Message
                         </label>
                         <textarea
@@ -105,8 +101,8 @@ export default function FeedbackPage() {
                             rows={6}
                             style={{
                                 width: '100%', padding: '10px 14px', borderRadius: 10,
-                                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
-                                color: 'white', fontSize: 14, outline: 'none', resize: 'vertical',
+                                background: 'var(--card-bg-hover)', border: '1px solid var(--border-medium)',
+                                color: 'var(--app-text)', fontSize: 14, outline: 'none', resize: 'vertical',
                                 boxSizing: 'border-box', fontFamily: "'DM Sans', sans-serif",
                             }}
                         />
@@ -121,8 +117,8 @@ export default function FeedbackPage() {
                         disabled={loading || !form.name || !form.message}
                         style={{
                             padding: '12px 0', borderRadius: 10, fontSize: 14, fontWeight: 600,
-                            background: 'linear-gradient(135deg, #d4af37, #b8962e)',
-                            color: '#0a0a0f', border: 'none', cursor: 'pointer',
+                            background: 'linear-gradient(135deg, var(--app-gold), #b8962e)',
+                            color: 'var(--app-bg)', border: 'none', cursor: 'pointer',
                             opacity: loading || !form.name || !form.message ? 0.5 : 1,
                             transition: 'opacity 0.2s',
                         }}

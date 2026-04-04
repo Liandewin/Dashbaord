@@ -1,33 +1,13 @@
 export default function JournalLoading() {
     return (
-        <div style={{
-            height: '100vh',
-            background: '#0a0a0f',
+        <div className="flex flex-col min-h-screen lg:h-screen" style={{
+            background: 'var(--app-bg)',
             fontFamily: "'DM Sans', sans-serif",
-            color: 'white',
-            display: 'flex',
-            flexDirection: 'column',
+            color: 'var(--app-text)',
         }}>
-            <style>{`
-        @keyframes shimmer {
-          0% { background-position: -1000px 0; }
-          100% { background-position: 1000px 0; }
-        }
-        .skeleton {
-          background: linear-gradient(
-            90deg,
-            rgba(255,255,255,0.04) 25%,
-            rgba(255,255,255,0.08) 50%,
-            rgba(255,255,255,0.04) 75%
-          );
-          background-size: 1000px 100%;
-          animation: shimmer 2s infinite;
-          border-radius: 8px;
-        }
-      `}</style>
 
             {/* Header */}
-            <div style={{ padding: '24px 32px', borderBottom: '1px solid rgba(255,255,255,0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                     <div className="skeleton" style={{ height: 44, width: 220, marginBottom: 10 }} />
                     <div className="skeleton" style={{ height: 13, width: 70 }} />
@@ -36,10 +16,10 @@ export default function JournalLoading() {
             </div>
 
             {/* Body */}
-            <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+            <div className="flex flex-col-reverse lg:flex-row lg:flex-1 lg:overflow-hidden">
 
                 {/* Left — main reading/writing area */}
-                <div style={{ flex: 1, padding: 40, borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+                <div className="flex-1 border-t lg:border-t-0 lg:border-r" style={{ padding: 24, borderColor: 'var(--border-subtle)' }}>
                     <div className="skeleton" style={{ height: 44, width: '55%', marginBottom: 12 }} />
                     <div className="skeleton" style={{ height: 13, width: 100, marginBottom: 32 }} />
                     {[92, 85, 78, 88, 60, 72].map((w, i) => (
@@ -48,12 +28,12 @@ export default function JournalLoading() {
                 </div>
 
                 {/* Right — entry list */}
-                <div style={{ width: 300, overflowY: 'auto', padding: 16 }}>
+                <div className="lg:w-[300px] overflow-y-auto" style={{ padding: 16 }}>
                     {[...Array(5)].map((_, i) => (
                         <div key={i} style={{
                             padding: 14, borderRadius: 12, marginBottom: 8,
-                            background: 'rgba(255,255,255,0.03)',
-                            border: '1px solid rgba(255,255,255,0.06)',
+                            background: 'var(--card-bg-subtle)',
+                            border: '1px solid var(--border-subtle)',
                         }}>
                             <div className="skeleton" style={{ height: 14, width: '75%', marginBottom: 8 }} />
                             <div className="skeleton" style={{ height: 11, width: '50%', marginBottom: 6 }} />

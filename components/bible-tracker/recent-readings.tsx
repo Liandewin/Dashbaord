@@ -34,15 +34,15 @@ export default function RecentReadings({ readings, loading, onDelete }: Props) {
                 <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 22, margin: 0, fontWeight: 600 }}>
                     Recent Readings
                 </h3>
-                <span style={{ fontSize: 12, color: '#d4af37' }}>{readings.length} total</span>
+                <span style={{ fontSize: 12, color: 'var(--app-gold)' }}>{readings.length} total</span>
             </div>
 
             {loading ? (
-                <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 14 }}>Loading...</p>
+                <p style={{ color: 'var(--text-dim)', fontSize: 14 }}>Loading...</p>
             ) : readings.length === 0 ? (
                 <div style={{ textAlign: 'center', padding: '32px 0' }}>
                     <p style={{ fontSize: 32, marginBottom: 8 }}>📖</p>
-                    <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 14 }}>No readings yet. Log your first one!</p>
+                    <p style={{ color: 'var(--text-dim)', fontSize: 14 }}>No readings yet. Log your first one!</p>
                 </div>
             ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10, maxHeight: 280, overflowY: 'auto' }}>
@@ -50,21 +50,21 @@ export default function RecentReadings({ readings, loading, onDelete }: Props) {
                         <div key={r.id} className="reading-row">
                             <div style={{
                                 width: 38, height: 38, borderRadius: 10, flexShrink: 0,
-                                background: r.completed ? 'rgba(212,175,55,0.15)' : 'rgba(255,255,255,0.05)',
+                                background: r.completed ? 'var(--gold-bg-medium)' : 'var(--card-bg-hover)',
                                 display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16,
-                                border: r.completed ? '1px solid rgba(212,175,55,0.3)' : '1px solid rgba(255,255,255,0.08)',
+                                border: r.completed ? '1px solid var(--gold-border)' : '1px solid var(--border-default)',
                             }}>
                                 {r.completed ? '✝️' : '📖'}
                             </div>
                             <div style={{ flex: 1, minWidth: 0 }}>
                                 <div style={{ fontWeight: 600, fontSize: 14 }}>{r.book} {r.chapter}</div>
                                 {r.notes && (
-                                    <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                    <div style={{ fontSize: 12, color: 'var(--text-dim)', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                         {r.notes}
                                     </div>
                                 )}
                             </div>
-                            <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', flexShrink: 0 }}>{formatDate(r.date)}</span>
+                            <span style={{ fontSize: 12, color: 'var(--text-dim)', flexShrink: 0 }}>{formatDate(r.date)}</span>
                             <button className="delete-btn" onClick={() => handleDelete(r.id)}>✕</button>
                         </div>
                     ))}

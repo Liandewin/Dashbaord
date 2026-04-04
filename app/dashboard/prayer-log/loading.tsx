@@ -1,29 +1,12 @@
 export default function PrayerLogLoading() {
     return (
-        <div style={{
+        <div className="page-padding" style={{
             minHeight: '100vh',
-            background: '#0a0a0f',
-            padding: '32px',
+            background: 'var(--app-bg)',
+
             fontFamily: "'DM Sans', sans-serif",
-            color: 'white',
+            color: 'var(--app-text)',
         }}>
-            <style>{`
-        @keyframes shimmer {
-          0% { background-position: -1000px 0; }
-          100% { background-position: 1000px 0; }
-        }
-        .skeleton {
-          background: linear-gradient(
-            90deg,
-            rgba(255,255,255,0.04) 25%,
-            rgba(255,255,255,0.08) 50%,
-            rgba(255,255,255,0.04) 75%
-          );
-          background-size: 1000px 100%;
-          animation: shimmer 2s infinite;
-          border-radius: 8px;
-        }
-      `}</style>
 
             {/* Header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 32 }}>
@@ -35,11 +18,11 @@ export default function PrayerLogLoading() {
             </div>
 
             {/* 4 stats cards */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 24 }}>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                 {[...Array(4)].map((_, i) => (
                     <div key={i} style={{
-                        background: i === 0 ? 'rgba(212,175,55,0.08)' : 'rgba(255,255,255,0.04)',
-                        border: `1px solid ${i === 0 ? 'rgba(212,175,55,0.25)' : 'rgba(255,255,255,0.08)'}`,
+                        background: i === 0 ? 'var(--gold-card-bg)' : 'var(--card-bg)',
+                        border: `1px solid ${i === 0 ? 'var(--gold-border-subtle)' : 'var(--border-default)'}`,
                         borderRadius: 16,
                         padding: 20,
                     }}>
@@ -55,8 +38,8 @@ export default function PrayerLogLoading() {
 
             {/* Prayer Journal card */}
             <div style={{
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                background: 'var(--card-bg)',
+                border: '1px solid var(--border-default)',
                 borderRadius: 16,
                 padding: 24,
             }}>
@@ -66,8 +49,8 @@ export default function PrayerLogLoading() {
                         <div key={i} style={{
                             display: 'flex', alignItems: 'flex-start', gap: 14,
                             padding: 16, borderRadius: 12,
-                            background: 'rgba(255,255,255,0.03)',
-                            border: '1px solid rgba(255,255,255,0.06)',
+                            background: 'var(--card-bg-subtle)',
+                            border: '1px solid var(--border-subtle)',
                         }}>
                             <div className="skeleton" style={{ width: 36, height: 36, borderRadius: 10, flexShrink: 0 }} />
                             <div style={{ flex: 1 }}>

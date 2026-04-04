@@ -39,7 +39,7 @@ export function NavMain({
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel className="text-xs uppercase tracking-widest text-white/30 mb-2">
+      <SidebarGroupLabel className="text-xs uppercase tracking-widest text-[var(--text-faint)] mb-2">
         Platform
       </SidebarGroupLabel>
       <SidebarMenu>
@@ -54,20 +54,20 @@ export function NavMain({
                   className={`
                     text-base font-medium transition-all duration-200 rounded-lg px-3 py-2
                     ${isActive
-                      ? 'text-[#d4af37] bg-[rgba(212,175,55,0.1)] border border-[rgba(212,175,55,0.2)]'
-                      : 'text-white/60 hover:text-white hover:bg-white/5'
+                      ? 'text-[var(--app-gold)] bg-[var(--gold-bg-subtle)] border border-[var(--gold-border-faint)]'
+                      : 'text-[var(--text-soft)] hover:text-[var(--app-text)] hover:bg-[var(--card-bg-hover)]'
                     }
                   `}
                 >
                   <Link href={item.url}>
-                    <item.icon className={isActive ? 'text-[#d4af37]' : ''} />
+                    <item.icon className={isActive ? 'text-[var(--app-gold)]' : ''} />
                     <span>{item.title}</span>
                   </Link>
                 </SidebarMenuButton>
                 {item.items?.length ? (
                   <>
                     <CollapsibleTrigger asChild>
-                      <SidebarMenuAction className="data-[state=open]:rotate-90 text-white/40 hover:text-white/70">
+                      <SidebarMenuAction className="data-[state=open]:rotate-90 text-[var(--text-faint)] hover:text-[var(--text-soft)]">
                         <ChevronRight />
                         <span className="sr-only">Toggle</span>
                       </SidebarMenuAction>
@@ -83,8 +83,8 @@ export function NavMain({
                                 className={`
                                   text-sm transition-all duration-200
                                   ${isSubActive
-                                    ? 'text-[#d4af37]'
-                                    : 'text-white/40 hover:text-white/70'
+                                    ? 'text-[var(--app-gold)]'
+                                    : 'text-[var(--text-faint)] hover:text-[var(--text-soft)]'
                                   }
                                 `}
                               >

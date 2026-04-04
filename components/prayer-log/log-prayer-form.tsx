@@ -47,8 +47,8 @@ export default function LogPrayerForm({ onSave, onCancel }: Props) {
 
     return (
         <div style={{
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(212,175,55,0.2)',
+            background: 'var(--card-bg)',
+            border: '1px solid var(--gold-border-faint)',
             borderRadius: 16,
             padding: 24,
             marginBottom: 24,
@@ -59,7 +59,7 @@ export default function LogPrayerForm({ onSave, onCancel }: Props) {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                 <div>
-                    <label style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 6 }}>
+                    <label style={{ fontSize: 12, color: 'var(--app-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 6 }}>
                         Title *
                     </label>
                     <input
@@ -69,14 +69,14 @@ export default function LogPrayerForm({ onSave, onCancel }: Props) {
                         onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
                         style={{
                             width: '100%', padding: '10px 14px', borderRadius: 10,
-                            background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
-                            color: 'white', fontSize: 14, outline: 'none', boxSizing: 'border-box',
+                            background: 'var(--card-bg-hover)', border: '1px solid var(--border-medium)',
+                            color: 'var(--app-text)', fontSize: 14, outline: 'none', boxSizing: 'border-box',
                         }}
                     />
                 </div>
 
                 <div>
-                    <label style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 6 }}>
+                    <label style={{ fontSize: 12, color: 'var(--app-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 6 }}>
                         Details
                     </label>
                     <textarea
@@ -86,15 +86,15 @@ export default function LogPrayerForm({ onSave, onCancel }: Props) {
                         rows={3}
                         style={{
                             width: '100%', padding: '10px 14px', borderRadius: 10,
-                            background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
-                            color: 'white', fontSize: 14, outline: 'none', resize: 'vertical', boxSizing: 'border-box',
+                            background: 'var(--card-bg-hover)', border: '1px solid var(--border-medium)',
+                            color: 'var(--app-text)', fontSize: 14, outline: 'none', resize: 'vertical', boxSizing: 'border-box',
                         }}
                     />
                 </div>
 
                 <div style={{ display: 'flex', gap: 14 }}>
                     <div style={{ flex: 1 }}>
-                        <label style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 6 }}>
+                        <label style={{ fontSize: 12, color: 'var(--app-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 6 }}>
                             Date
                         </label>
                         <input
@@ -103,19 +103,19 @@ export default function LogPrayerForm({ onSave, onCancel }: Props) {
                             onChange={e => setForm(f => ({ ...f, date: e.target.value }))}
                             style={{
                                 width: '100%', padding: '10px 14px', borderRadius: 10,
-                                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
-                                color: 'white', fontSize: 14, outline: 'none', boxSizing: 'border-box',
+                                background: 'var(--card-bg-hover)', border: '1px solid var(--border-medium)',
+                                color: 'var(--app-text)', fontSize: 14, outline: 'none', boxSizing: 'border-box',
                             }}
                         />
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'flex-end', paddingBottom: 2 }}>
-                        <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: 14, color: 'rgba(255,255,255,0.6)' }}>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: 14, color: 'var(--text-medium)' }}>
                             <input
                                 type="checkbox"
                                 checked={form.answered}
                                 onChange={e => setForm(f => ({ ...f, answered: e.target.checked }))}
-                                style={{ accentColor: '#d4af37', width: 16, height: 16 }}
+                                style={{ accentColor: 'var(--app-gold)', width: 16, height: 16 }}
                             />
                             Already answered
                         </label>
@@ -127,7 +127,7 @@ export default function LogPrayerForm({ onSave, onCancel }: Props) {
                         onClick={onCancel}
                         style={{
                             padding: '9px 18px', borderRadius: 10, fontSize: 14, cursor: 'pointer',
-                            background: 'transparent', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)',
+                            background: 'transparent', border: '1px solid var(--border-medium)', color: 'var(--text-soft)',
                         }}
                     >
                         Cancel
@@ -137,8 +137,8 @@ export default function LogPrayerForm({ onSave, onCancel }: Props) {
                         disabled={saving || !form.title}
                         style={{
                             padding: '9px 18px', borderRadius: 10, fontSize: 14, cursor: 'pointer',
-                            background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.3)',
-                            color: '#d4af37', fontWeight: 600, opacity: saving || !form.title ? 0.5 : 1,
+                            background: 'var(--gold-bg-medium)', border: '1px solid var(--gold-border)',
+                            color: 'var(--app-gold)', fontWeight: 600, opacity: saving || !form.title ? 0.5 : 1,
                         }}
                     >
                         {saving ? 'Saving...' : 'Save Prayer'}

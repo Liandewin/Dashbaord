@@ -27,8 +27,8 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
 
     return (
         <div style={{
-            background: 'rgba(255,255,255,0.04)',
-            border: `1px solid ${open ? 'rgba(212,175,55,0.25)' : 'rgba(255,255,255,0.08)'}`,
+            background: 'var(--card-bg)',
+            border: `1px solid ${open ? 'var(--gold-border-subtle)' : 'var(--border-default)'}`,
             borderRadius: 12,
             overflow: 'hidden',
             transition: 'border-color 0.2s',
@@ -39,13 +39,13 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
                     width: '100%', padding: '16px 20px',
                     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                     background: 'transparent', border: 'none', cursor: 'pointer',
-                    color: 'white', fontSize: 15, fontWeight: 600,
+                    color: 'var(--app-text)', fontSize: 15, fontWeight: 600,
                     fontFamily: "'DM Sans', sans-serif", textAlign: 'left',
                 }}
             >
                 <span>{question}</span>
                 <span style={{
-                    color: '#d4af37', fontSize: 20, lineHeight: 1,
+                    color: 'var(--app-gold)', fontSize: 20, lineHeight: 1,
                     transform: open ? 'rotate(45deg)' : 'rotate(0deg)',
                     transition: 'transform 0.2s',
                     flexShrink: 0, marginLeft: 12,
@@ -54,7 +54,7 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
             {open && (
                 <div style={{
                     padding: '0 20px 16px',
-                    fontSize: 14, color: 'rgba(255,255,255,0.5)',
+                    fontSize: 14, color: 'var(--text-soft)',
                     lineHeight: 1.7,
                 }}>
                     {answer}
@@ -97,33 +97,29 @@ export default function SupportPage() {
     }
 
     return (
-        <div style={{
+        <div className="page-padding" style={{
             minHeight: '100vh',
-            background: '#0a0a0f',
-            padding: '32px',
-            fontFamily: "'DM Sans', sans-serif",
-            color: 'white',
-        }}>
-            <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
-            `}</style>
+            background: 'var(--app-bg)',
 
+            fontFamily: "'DM Sans', sans-serif",
+            color: 'var(--app-text)',
+        }}>
             {/* Header */}
             <div style={{ marginBottom: 40 }}>
                 <h1 style={{
                     fontFamily: "'Cormorant Garamond', serif",
                     fontSize: 42, fontWeight: 700, margin: 0, lineHeight: 1.1,
                 }}>
-                    How can we <span style={{ color: '#d4af37' }}>Help?</span>
+                    How can we <span style={{ color: 'var(--app-gold)' }}>Help?</span>
                 </h1>
-                <p style={{ color: 'rgba(255,255,255,0.4)', marginTop: 6, fontSize: 14 }}>
+                <p style={{ color: 'var(--app-text-muted)', marginTop: 6, fontSize: 14 }}>
                     Find answers below or send us a message
                 </p>
             </div>
 
             {/* FAQ Section */}
             <div style={{ maxWidth: 640, marginBottom: 48 }}>
-                <p style={{ fontSize: 12, color: '#d4af37', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 16 }}>
+                <p style={{ fontSize: 12, color: 'var(--app-gold)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 16 }}>
                     Frequently Asked Questions
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -135,14 +131,14 @@ export default function SupportPage() {
 
             {/* Contact Form */}
             <div style={{ maxWidth: 640 }}>
-                <p style={{ fontSize: 12, color: '#d4af37', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 16 }}>
+                <p style={{ fontSize: 12, color: 'var(--app-gold)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 16 }}>
                     Still need help?
                 </p>
 
                 {submitted ? (
                     <div style={{
-                        background: 'rgba(212,175,55,0.08)',
-                        border: '1px solid rgba(212,175,55,0.25)',
+                        background: 'var(--gold-bg-subtle)',
+                        border: '1px solid var(--gold-border-subtle)',
                         borderRadius: 16, padding: 40,
                         textAlign: 'center',
                     }}>
@@ -150,19 +146,19 @@ export default function SupportPage() {
                         <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 28, fontWeight: 700, margin: '0 0 8px' }}>
                             Message sent!
                         </h2>
-                        <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 14, margin: 0 }}>
+                        <p style={{ color: 'var(--app-text-muted)', fontSize: 14, margin: 0 }}>
                             We'll get back to you as soon as possible.
                         </p>
                     </div>
                 ) : (
                     <div style={{
-                        background: 'rgba(255,255,255,0.04)',
-                        border: '1px solid rgba(255,255,255,0.08)',
+                        background: 'var(--card-bg)',
+                        border: '1px solid var(--border-default)',
                         borderRadius: 16, padding: 32,
                         display: 'flex', flexDirection: 'column', gap: 20,
                     }}>
                         <div>
-                            <label style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 8 }}>
+                            <label style={{ fontSize: 12, color: 'var(--app-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 8 }}>
                                 Subject
                             </label>
                             <input
@@ -172,14 +168,14 @@ export default function SupportPage() {
                                 onChange={e => setForm(f => ({ ...f, subject: e.target.value }))}
                                 style={{
                                     width: '100%', padding: '10px 14px', borderRadius: 10,
-                                    background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
-                                    color: 'white', fontSize: 14, outline: 'none', boxSizing: 'border-box',
+                                    background: 'var(--card-bg-hover)', border: '1px solid var(--border-medium)',
+                                    color: 'var(--app-text)', fontSize: 14, outline: 'none', boxSizing: 'border-box',
                                 }}
                             />
                         </div>
 
                         <div>
-                            <label style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 8 }}>
+                            <label style={{ fontSize: 12, color: 'var(--app-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 8 }}>
                                 Message
                             </label>
                             <textarea
@@ -189,8 +185,8 @@ export default function SupportPage() {
                                 rows={5}
                                 style={{
                                     width: '100%', padding: '10px 14px', borderRadius: 10,
-                                    background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
-                                    color: 'white', fontSize: 14, outline: 'none', resize: 'vertical',
+                                    background: 'var(--card-bg-hover)', border: '1px solid var(--border-medium)',
+                                    color: 'var(--app-text)', fontSize: 14, outline: 'none', resize: 'vertical',
                                     boxSizing: 'border-box', fontFamily: "'DM Sans', sans-serif",
                                 }}
                             />
@@ -205,8 +201,8 @@ export default function SupportPage() {
                             disabled={loading || !form.subject || !form.message}
                             style={{
                                 padding: '12px 0', borderRadius: 10, fontSize: 14, fontWeight: 600,
-                                background: 'linear-gradient(135deg, #d4af37, #b8962e)',
-                                color: '#0a0a0f', border: 'none', cursor: 'pointer',
+                                background: 'linear-gradient(135deg, var(--app-gold), #b8962e)',
+                                color: 'var(--app-bg)', border: 'none', cursor: 'pointer',
                                 opacity: loading || !form.subject || !form.message ? 0.5 : 1,
                                 transition: 'opacity 0.2s',
                             }}

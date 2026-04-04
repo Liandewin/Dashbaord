@@ -11,12 +11,12 @@ import BibleTrackerClient from '@/components/bible-tracker/bible-tracker-client'
 
 export default function BibleTrackerPage() {
     return (
-        <div style={{
+        <div className="page-padding" style={{
             minHeight: '100vh',
-            background: '#0a0a0f',
-            padding: '32px',
+            background: 'var(--app-bg)',
+
             fontFamily: "'DM Sans', sans-serif",
-            color: 'white',
+            color: 'var(--app-text)',
         }}>
             <Suspense fallback={<WelcomeHeaderSkeleton />}>
                 <WelcomeHeader />

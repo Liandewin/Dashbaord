@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const floatingCards = [
   {
@@ -95,10 +96,8 @@ const pillars = [
 
 export default function LandingPage() {
   return (
-    <div className="relative min-h-screen bg-[#0a0a0f] text-white">
+    <div className="relative min-h-screen" style={{ background: 'var(--app-bg)', color: 'var(--app-text)' }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap');
-
         * { box-sizing: border-box; }
 
         .font-display { font-family: 'Cormorant Garamond', serif; }
@@ -149,79 +148,79 @@ export default function LandingPage() {
         }
 
         .card-scripture {
-          background: linear-gradient(135deg, rgba(212,175,55,0.12), rgba(212,175,55,0.04));
-          border: 1px solid rgba(212,175,55,0.25);
+          background: var(--gold-bg-subtle);
+          border: 1px solid var(--gold-border-subtle);
           backdrop-filter: blur(12px);
         }
 
         .card-quote {
-          background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-          border: 1px solid rgba(255,255,255,0.1);
+          background: var(--card-bg);
+          border: 1px solid var(--border-default);
           backdrop-filter: blur(12px);
         }
 
-        .gold { color: #d4af37; }
+        .gold { color: var(--app-gold); }
 
         .btn-primary {
-          background: linear-gradient(135deg, #d4af37, #b8962e);
-          color: #0a0a0f;
+          background: linear-gradient(135deg, var(--app-gold), #b8962e);
+          color: var(--app-bg);
           font-weight: 600;
           letter-spacing: 0.04em;
           transition: all 0.3s ease;
-          box-shadow: 0 0 30px rgba(212,175,55,0.25);
+          box-shadow: 0 0 30px var(--gold-bg-strong);
         }
         .btn-primary:hover {
           transform: translateY(-2px);
-          box-shadow: 0 0 50px rgba(212,175,55,0.4);
+          box-shadow: 0 0 50px var(--gold-bg-strong);
         }
 
         .btn-secondary {
           background: transparent;
-          border: 1px solid rgba(255,255,255,0.2);
-          color: rgba(255,255,255,0.8);
+          border: 1px solid var(--border-medium);
+          color: var(--text-soft);
           transition: all 0.3s ease;
         }
         .btn-secondary:hover {
-          border-color: rgba(212,175,55,0.5);
-          color: #d4af37;
+          border-color: var(--gold-border);
+          color: var(--app-gold);
           transform: translateY(-2px);
         }
 
         .nav-link {
-          color: rgba(255,255,255,0.55);
+          color: var(--text-soft);
           transition: color 0.2s;
           font-size: 0.875rem;
           letter-spacing: 0.02em;
         }
-        .nav-link:hover { color: rgba(255,255,255,0.9); }
+        .nav-link:hover { color: var(--app-text); }
 
         .feature-card {
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.08);
+          background: var(--card-bg-subtle);
+          border: 1px solid var(--border-subtle);
           border-radius: 20px;
           padding: 32px;
           transition: all 0.3s ease;
         }
         .feature-card:hover {
-          background: rgba(212,175,55,0.06);
-          border-color: rgba(212,175,55,0.25);
+          background: var(--gold-bg-subtle);
+          border-color: var(--gold-border-subtle);
           transform: translateY(-4px);
         }
 
         .pillar-card {
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.06);
+          background: var(--card-bg);
+          border: 1px solid var(--border-subtle);
           border-radius: 20px;
           padding: 36px 32px;
         }
 
         .section-divider {
           border: none;
-          border-top: 1px solid rgba(255,255,255,0.06);
+          border-top: 1px solid var(--border-subtle);
           margin: 0 32px;
         }
 
-        .headline-muted { color: rgba(255,255,255,0.25); }
+        .headline-muted { color: var(--text-faint); }
       `}</style>
 
       {/* Grain overlay */}
@@ -235,10 +234,10 @@ export default function LandingPage() {
       {/* Navbar */}
       <nav className="font-body relative z-50 flex items-center justify-between px-8 py-6 max-w-6xl mx-auto">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-md flex items-center justify-center text-sm" style={{ background: 'linear-gradient(135deg, #d4af37, #b8962e)' }}>
+          <div className="w-7 h-7 rounded-md flex items-center justify-center text-sm" style={{ background: 'linear-gradient(135deg, var(--app-gold), #b8962e)' }}>
             ✝
           </div>
-          <span className="font-medium text-white/90 tracking-wide text-sm">FaithGrowth</span>
+          <span className="font-medium tracking-wide text-sm" style={{ color: 'var(--app-text)' }}>FaithGrowth</span>
         </div>
 
         <div className="hidden md:flex items-center gap-8">
@@ -247,9 +246,12 @@ export default function LandingPage() {
           <a href="#scripture" className="nav-link">Scripture</a>
         </div>
 
-        <Link href="/login" className="btn-secondary font-body text-sm px-5 py-2 rounded-full">
-          Log In
-        </Link>
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <Link href="/login" className="btn-secondary font-body text-sm px-5 py-2 rounded-full">
+            Log In
+          </Link>
+        </div>
       </nav>
 
       {/* Floating Quote Cards */}
@@ -266,8 +268,8 @@ export default function LandingPage() {
           {card.type === 'scripture' && (
             <span className="text-[10px] gold font-body uppercase tracking-widest mb-2 block">Scripture</span>
           )}
-          <p className="font-display text-sm text-white/80 leading-relaxed italic">"{card.quote}"</p>
-          <p className="font-body text-[11px] mt-2" style={{ color: card.type === 'scripture' ? '#d4af37' : 'rgba(255,255,255,0.4)' }}>
+          <p className="font-display text-sm leading-relaxed italic" style={{ color: 'var(--text-soft)' }}>"{card.quote}"</p>
+          <p className="font-body text-[11px] mt-2" style={{ color: card.type === 'scripture' ? 'var(--app-gold)' : 'var(--text-dim)' }}>
             — {card.reference}
           </p>
         </div>
@@ -280,9 +282,9 @@ export default function LandingPage() {
           style={{
             animationDelay: '0.1s',
             animationFillMode: 'forwards',
-            background: 'rgba(212,175,55,0.1)',
-            border: '1px solid rgba(212,175,55,0.25)',
-            color: '#d4af37',
+            background: 'var(--gold-bg-subtle)',
+            border: '1px solid var(--gold-border-subtle)',
+            color: 'var(--app-gold)',
           }}
         >
           <span>✝</span> Faith · Discipline · Purpose
@@ -307,7 +309,7 @@ export default function LandingPage() {
         <p
           className="font-body fade-in-up mt-8 max-w-lg text-base leading-relaxed"
           style={{
-            color: 'rgba(255,255,255,0.45)',
+            color: 'var(--text-soft)',
             animationDelay: '0.35s',
             animationFillMode: 'forwards',
           }}
@@ -337,7 +339,7 @@ export default function LandingPage() {
           <h2 className="font-display text-5xl md:text-6xl font-bold">
             Built around your growth
           </h2>
-          <p className="font-body mt-4 max-w-md mx-auto text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)' }}>
+          <p className="font-body mt-4 max-w-md mx-auto text-sm leading-relaxed" style={{ color: 'var(--text-dim)' }}>
             Five focused tools, one dashboard. No fluff, no distraction — just the disciplines that matter.
           </p>
         </div>
@@ -347,18 +349,18 @@ export default function LandingPage() {
             <div key={i} className="feature-card">
               <div className="text-3xl mb-5">{f.icon}</div>
               <h3 className="font-display text-2xl font-semibold mb-3">{f.title}</h3>
-              <p className="font-body text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+              <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--text-soft)' }}>
                 {f.description}
               </p>
             </div>
           ))}
 
           {/* CTA card */}
-          <div className="feature-card flex flex-col items-start justify-between" style={{ background: 'rgba(212,175,55,0.06)', borderColor: 'rgba(212,175,55,0.2)' }}>
+          <div className="feature-card flex flex-col items-start justify-between" style={{ background: 'var(--gold-bg-subtle)', borderColor: 'var(--gold-border-faint)' }}>
             <div>
               <div className="text-3xl mb-5">⚔️</div>
               <h3 className="font-display text-2xl font-semibold mb-3">Monthly Review</h3>
-              <p className="font-body text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+              <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--text-soft)' }}>
                 At the end of every month, get a full breakdown of your progress and earn your tier — Warrior, Soldier, Recruit, or Apprentice.
               </p>
             </div>
@@ -378,7 +380,7 @@ export default function LandingPage() {
           <h2 className="font-display text-5xl md:text-6xl font-bold">
             Structure creates freedom
           </h2>
-          <p className="font-body mt-4 max-w-md mx-auto text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)' }}>
+          <p className="font-body mt-4 max-w-md mx-auto text-sm leading-relaxed" style={{ color: 'var(--text-dim)' }}>
             The men who grow the most aren't the most talented — they're the most consistent. This app is built on that truth.
           </p>
         </div>
@@ -388,7 +390,7 @@ export default function LandingPage() {
             <div key={i} className="pillar-card">
               <div className="text-3xl mb-6">{p.icon}</div>
               <h3 className="font-display text-2xl font-semibold mb-4">{p.title}</h3>
-              <p className="font-body text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+              <p className="font-body text-sm leading-relaxed" style={{ color: 'var(--text-soft)' }}>
                 {p.description}
               </p>
             </div>
@@ -400,11 +402,11 @@ export default function LandingPage() {
       <section
         id="scripture"
         className="relative z-30 px-8 pt-16 pb-20 text-center"
-        style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
+        style={{ borderTop: '1px solid var(--border-subtle)' }}
       >
         <p
           className="font-display text-2xl md:text-3xl italic max-w-2xl mx-auto"
-          style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}
+          style={{ color: 'var(--text-medium)', lineHeight: 1.6 }}
         >
           "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you."
         </p>
@@ -414,7 +416,7 @@ export default function LandingPage() {
           <Link href="/login" className="btn-primary font-body text-sm px-8 py-3.5 rounded-full">
             Begin your journey →
           </Link>
-          <p className="font-body text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>
+          <p className="font-body text-xs" style={{ color: 'var(--text-faint)' }}>
             Free to use. No credit card required.
           </p>
         </div>

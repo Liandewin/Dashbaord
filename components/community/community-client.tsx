@@ -233,35 +233,35 @@ export default function CommunityClient() {
     return (
         <div style={{
             minHeight: '100vh',
-            background: '#0a0a0f',
+            background: 'var(--app-bg)',
             fontFamily: "'DM Sans', sans-serif",
-            color: 'white',
+            color: 'var(--app-text)',
         }}>
             <style>{`
-                .post-card:hover { background: rgba(255,255,255,0.04) !important; }
-                .like-btn:hover { color: #d4af37 !important; border-color: rgba(212,175,55,0.3) !important; }
-                .like-btn.liked { color: #d4af37 !important; border-color: rgba(212,175,55,0.3) !important; background: rgba(212,175,55,0.08) !important; }
-                .comment-btn:hover { color: rgba(255,255,255,0.7) !important; border-color: rgba(255,255,255,0.15) !important; }
+                .post-card:hover { background: var(--card-bg) !important; }
+                .like-btn:hover { color: var(--app-gold) !important; border-color: var(--gold-border) !important; }
+                .like-btn.liked { color: var(--app-gold) !important; border-color: var(--gold-border) !important; background: var(--gold-card-bg) !important; }
+                .comment-btn:hover { color: var(--text-medium) !important; border-color: var(--border-default) !important; }
                 .delete-btn:hover { color: #ef4444 !important; }
-                .send-btn:hover:not(:disabled) { background: rgba(212,175,55,0.25) !important; }
-                .toggle-anon:hover { border-color: rgba(212,175,55,0.4) !important; }
+                .send-btn:hover:not(:disabled) { background: var(--gold-bg-strong) !important; }
+                .toggle-anon:hover { border-color: var(--gold-border) !important; }
             `}</style>
 
             {/* Header */}
-            <div style={{ padding: '24px 32px', borderBottom: '1px solid rgba(255,255,255,0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ padding: '24px 32px', borderBottom: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                     <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, margin: 0, lineHeight: 1.1 }}>
-                        Community <span style={{ color: '#d4af37' }}>Feed</span>
+                        Community <span style={{ color: 'var(--app-gold)' }}>Feed</span>
                     </h1>
-                    <p style={{ color: 'rgba(255,255,255,0.4)', marginTop: 4, fontSize: 13 }}>
+                    <p style={{ color: 'var(--app-text-muted)', marginTop: 4, fontSize: 13 }}>
                         Share encouragement, reflections, and prayers
                     </p>
                 </div>
                 <button
                     onClick={() => setShowComposer(v => !v)}
                     style={{
-                        background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.3)',
-                        color: '#d4af37', padding: '10px 20px', borderRadius: 10,
+                        background: 'var(--gold-bg-medium)', border: '1px solid var(--gold-border)',
+                        color: 'var(--app-gold)', padding: '10px 20px', borderRadius: 10,
                         fontSize: 14, fontWeight: 600, cursor: 'pointer',
                     }}
                 >
@@ -274,7 +274,7 @@ export default function CommunityClient() {
                 {/* Composer */}
                 {showComposer && (
                     <div style={{
-                        background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
+                        background: 'var(--card-bg-subtle)', border: '1px solid var(--border-default)',
                         borderRadius: 16, padding: 24, marginBottom: 32,
                     }}>
                         <textarea
@@ -285,19 +285,19 @@ export default function CommunityClient() {
                             rows={4}
                             style={{
                                 width: '100%', background: 'transparent', border: 'none',
-                                color: 'rgba(255,255,255,0.85)', fontSize: 15, lineHeight: 1.7,
+                                color: 'var(--text-strong)', fontSize: 15, lineHeight: 1.7,
                                 outline: 'none', resize: 'none', boxSizing: 'border-box',
                                 fontFamily: "'DM Sans', sans-serif",
                             }}
                         />
-                        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', marginTop: 16, paddingTop: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div style={{ borderTop: '1px solid var(--border-subtle)', marginTop: 16, paddingTop: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <button
                                 className="toggle-anon"
                                 onClick={() => setNewAnonymous(v => !v)}
                                 style={{
-                                    background: newAnonymous ? 'rgba(212,175,55,0.08)' : 'transparent',
-                                    border: `1px solid ${newAnonymous ? 'rgba(212,175,55,0.3)' : 'rgba(255,255,255,0.1)'}`,
-                                    color: newAnonymous ? '#d4af37' : 'rgba(255,255,255,0.4)',
+                                    background: newAnonymous ? 'var(--gold-card-bg)' : 'transparent',
+                                    border: `1px solid ${newAnonymous ? 'var(--gold-border)' : 'var(--border-medium)'}`,
+                                    color: newAnonymous ? 'var(--app-gold)' : 'var(--app-text-muted)',
                                     padding: '6px 14px', borderRadius: 8, fontSize: 13, cursor: 'pointer',
                                     transition: 'all 0.2s',
                                 }}
@@ -309,8 +309,8 @@ export default function CommunityClient() {
                                     onClick={() => { setShowComposer(false); setNewContent(''); setNewAnonymous(false) }}
                                     style={{
                                         padding: '8px 16px', borderRadius: 10, fontSize: 14, cursor: 'pointer',
-                                        background: 'transparent', border: '1px solid rgba(255,255,255,0.1)',
-                                        color: 'rgba(255,255,255,0.4)',
+                                        background: 'transparent', border: '1px solid var(--border-medium)',
+                                        color: 'var(--app-text-muted)',
                                     }}
                                 >
                                     Cancel
@@ -321,8 +321,8 @@ export default function CommunityClient() {
                                     disabled={posting || !newContent.trim()}
                                     style={{
                                         padding: '8px 18px', borderRadius: 10, fontSize: 14, cursor: 'pointer',
-                                        background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.3)',
-                                        color: '#d4af37', fontWeight: 600,
+                                        background: 'var(--gold-bg-medium)', border: '1px solid var(--gold-border)',
+                                        color: 'var(--app-gold)', fontWeight: 600,
                                         opacity: posting || !newContent.trim() ? 0.5 : 1,
                                         transition: 'all 0.2s',
                                     }}
@@ -340,7 +340,7 @@ export default function CommunityClient() {
                 ) : posts.length === 0 ? (
                     <div style={{ textAlign: 'center', paddingTop: 80 }}>
                         <p style={{ fontSize: 40, marginBottom: 12 }}>🌿</p>
-                        <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 15 }}>No posts yet. Be the first to share.</p>
+                        <p style={{ color: 'var(--text-dim)', fontSize: 15 }}>No posts yet. Be the first to share.</p>
                     </div>
                 ) : (
                     posts.map(post => (
@@ -348,7 +348,7 @@ export default function CommunityClient() {
                             key={post.id}
                             className="post-card"
                             style={{
-                                background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)',
+                                background: 'var(--card-bg-subtle)', border: '1px solid var(--border-subtle)',
                                 borderRadius: 16, padding: 24, marginBottom: 16, transition: 'background 0.2s',
                             }}
                         >
@@ -357,17 +357,17 @@ export default function CommunityClient() {
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                                     <div style={{
                                         width: 36, height: 36, borderRadius: '50%',
-                                        background: 'rgba(212,175,55,0.12)', border: '1px solid rgba(212,175,55,0.2)',
+                                        background: 'var(--gold-bg-subtle)', border: '1px solid var(--gold-border-faint)',
                                         display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                        fontSize: 14, color: '#d4af37', fontWeight: 600,
+                                        fontSize: 14, color: 'var(--app-gold)', fontWeight: 600,
                                     }}>
                                         {post.is_anonymous ? '?' : (post.author_name?.[0]?.toUpperCase() ?? '?')}
                                     </div>
                                     <div>
-                                        <div style={{ fontSize: 14, fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>
+                                        <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-strong)' }}>
                                             {post.is_anonymous ? 'Anonymous' : (post.author_name ?? 'Unknown')}
                                         </div>
-                                        <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>
+                                        <div style={{ fontSize: 12, color: 'var(--text-dim)' }}>
                                             {formatTime(post.created_at)}
                                         </div>
                                     </div>
@@ -378,7 +378,7 @@ export default function CommunityClient() {
                                         onClick={() => handleDeletePost(post.id)}
                                         style={{
                                             background: 'transparent', border: 'none',
-                                            color: 'rgba(255,255,255,0.2)', fontSize: 13, cursor: 'pointer',
+                                            color: 'var(--text-faint)', fontSize: 13, cursor: 'pointer',
                                             transition: 'color 0.2s', padding: '4px 8px',
                                         }}
                                     >
@@ -388,7 +388,7 @@ export default function CommunityClient() {
                             </div>
 
                             {/* Post content */}
-                            <p style={{ fontSize: 15, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)', margin: 0, whiteSpace: 'pre-wrap' }}>
+                            <p style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--text-strong)', margin: 0, whiteSpace: 'pre-wrap' }}>
                                 {post.content}
                             </p>
 
@@ -399,8 +399,8 @@ export default function CommunityClient() {
                                     onClick={() => handleLike(post)}
                                     style={{
                                         display: 'flex', alignItems: 'center', gap: 6,
-                                        background: 'transparent', border: '1px solid rgba(255,255,255,0.1)',
-                                        color: 'rgba(255,255,255,0.4)', padding: '6px 14px',
+                                        background: 'transparent', border: '1px solid var(--border-medium)',
+                                        color: 'var(--app-text-muted)', padding: '6px 14px',
                                         borderRadius: 8, fontSize: 13, cursor: 'pointer', transition: 'all 0.2s',
                                     }}
                                 >
@@ -411,8 +411,8 @@ export default function CommunityClient() {
                                     onClick={() => toggleComments(post.id)}
                                     style={{
                                         display: 'flex', alignItems: 'center', gap: 6,
-                                        background: 'transparent', border: '1px solid rgba(255,255,255,0.1)',
-                                        color: 'rgba(255,255,255,0.4)', padding: '6px 14px',
+                                        background: 'transparent', border: '1px solid var(--border-medium)',
+                                        color: 'var(--app-text-muted)', padding: '6px 14px',
                                         borderRadius: 8, fontSize: 13, cursor: 'pointer', transition: 'all 0.2s',
                                     }}
                                 >
@@ -422,25 +422,25 @@ export default function CommunityClient() {
 
                             {/* Comments section */}
                             {expandedPost === post.id && (
-                                <div style={{ marginTop: 20, borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 20 }}>
+                                <div style={{ marginTop: 20, borderTop: '1px solid var(--border-subtle)', paddingTop: 20 }}>
                                     {(comments[post.id] ?? []).length === 0 ? (
-                                        <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.25)', marginBottom: 16 }}>No comments yet.</p>
+                                        <p style={{ fontSize: 13, color: 'var(--text-faint)', marginBottom: 16 }}>No comments yet.</p>
                                     ) : (
                                         (comments[post.id] ?? []).map(c => (
                                             <div key={c.id} style={{ display: 'flex', gap: 10, marginBottom: 14 }}>
                                                 <div style={{
                                                     width: 28, height: 28, borderRadius: '50%', flexShrink: 0,
-                                                    background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)',
+                                                    background: 'var(--card-bg-hover)', border: '1px solid var(--border-default)',
                                                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                                    fontSize: 11, color: 'rgba(255,255,255,0.4)', fontWeight: 600,
+                                                    fontSize: 11, color: 'var(--app-text-muted)', fontWeight: 600,
                                                 }}>
                                                     {c.is_anonymous ? '?' : (c.author_name?.[0]?.toUpperCase() ?? '?')}
                                                 </div>
                                                 <div style={{ flex: 1 }}>
                                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 3 }}>
-                                                        <span style={{ fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.6)' }}>
+                                                        <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-soft)' }}>
                                                             {c.is_anonymous ? 'Anonymous' : (c.author_name ?? 'Unknown')}
-                                                            <span style={{ fontWeight: 400, color: 'rgba(255,255,255,0.25)', marginLeft: 8, fontSize: 12 }}>
+                                                            <span style={{ fontWeight: 400, color: 'var(--text-faint)', marginLeft: 8, fontSize: 12 }}>
                                                                 {formatTime(c.created_at)}
                                                             </span>
                                                         </span>
@@ -450,7 +450,7 @@ export default function CommunityClient() {
                                                                 onClick={() => handleDeleteComment(post.id, c.id)}
                                                                 style={{
                                                                     background: 'transparent', border: 'none',
-                                                                    color: 'rgba(255,255,255,0.2)', fontSize: 12,
+                                                                    color: 'var(--text-faint)', fontSize: 12,
                                                                     cursor: 'pointer', transition: 'color 0.2s',
                                                                 }}
                                                             >
@@ -458,7 +458,7 @@ export default function CommunityClient() {
                                                             </button>
                                                         )}
                                                     </div>
-                                                    <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: 'rgba(255,255,255,0.65)', whiteSpace: 'pre-wrap' }}>
+                                                    <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: 'var(--text-medium)', whiteSpace: 'pre-wrap' }}>
                                                         {c.content}
                                                     </p>
                                                 </div>
@@ -475,9 +475,9 @@ export default function CommunityClient() {
                                                 onChange={e => setCommentInputs(prev => ({ ...prev, [post.id]: e.target.value }))}
                                                 rows={2}
                                                 style={{
-                                                    width: '100%', background: 'rgba(255,255,255,0.04)',
-                                                    border: '1px solid rgba(255,255,255,0.08)', borderRadius: 10,
-                                                    color: 'rgba(255,255,255,0.8)', fontSize: 14, lineHeight: 1.6,
+                                                    width: '100%', background: 'var(--card-bg)',
+                                                    border: '1px solid var(--border-default)', borderRadius: 10,
+                                                    color: 'var(--text-strong)', fontSize: 14, lineHeight: 1.6,
                                                     padding: '10px 14px', outline: 'none', resize: 'none',
                                                     boxSizing: 'border-box', fontFamily: "'DM Sans', sans-serif",
                                                 }}
@@ -487,9 +487,9 @@ export default function CommunityClient() {
                                                     className="toggle-anon"
                                                     onClick={() => setCommentAnonymous(prev => ({ ...prev, [post.id]: !(prev[post.id] ?? false) }))}
                                                     style={{
-                                                        background: (commentAnonymous[post.id]) ? 'rgba(212,175,55,0.08)' : 'transparent',
-                                                        border: `1px solid ${commentAnonymous[post.id] ? 'rgba(212,175,55,0.3)' : 'rgba(255,255,255,0.1)'}`,
-                                                        color: commentAnonymous[post.id] ? '#d4af37' : 'rgba(255,255,255,0.35)',
+                                                        background: (commentAnonymous[post.id]) ? 'var(--gold-card-bg)' : 'transparent',
+                                                        border: `1px solid ${commentAnonymous[post.id] ? 'var(--gold-border)' : 'var(--border-medium)'}`,
+                                                        color: commentAnonymous[post.id] ? 'var(--app-gold)' : 'var(--text-dim)',
                                                         padding: '5px 12px', borderRadius: 8, fontSize: 12, cursor: 'pointer',
                                                         transition: 'all 0.2s',
                                                     }}
@@ -501,8 +501,8 @@ export default function CommunityClient() {
                                                     onClick={() => handleAddComment(post.id)}
                                                     disabled={submittingComment === post.id || !(commentInputs[post.id]?.trim())}
                                                     style={{
-                                                        background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.3)',
-                                                        color: '#d4af37', padding: '6px 16px', borderRadius: 8,
+                                                        background: 'var(--gold-bg-medium)', border: '1px solid var(--gold-border)',
+                                                        color: 'var(--app-gold)', padding: '6px 16px', borderRadius: 8,
                                                         fontSize: 13, fontWeight: 600, cursor: 'pointer',
                                                         opacity: submittingComment === post.id || !(commentInputs[post.id]?.trim()) ? 0.5 : 1,
                                                         transition: 'all 0.2s',

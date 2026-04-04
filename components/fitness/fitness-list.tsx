@@ -22,10 +22,10 @@ function formatDate(dateStr: string) {
 
 const TYPE_COLORS: Record<string, string> = {
     Cardio: '#f87171',
-    Strength: '#d4af37',
+    Strength: 'var(--app-gold)',
     Flexibility: '#4ade80',
     Sports: '#60a5fa',
-    Other: 'rgba(255,255,255,0.4)',
+    Other: 'var(--app-text-muted)',
 }
 
 export default function FitnessList({ entries, loading, onDelete }: Props) {
@@ -38,8 +38,8 @@ export default function FitnessList({ entries, loading, onDelete }: Props) {
 
     return (
         <div style={{
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: 'var(--card-bg)',
+            border: '1px solid var(--border-default)',
             borderRadius: 16,
             padding: 24,
         }}>
@@ -47,23 +47,23 @@ export default function FitnessList({ entries, loading, onDelete }: Props) {
                 <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 22, margin: 0, fontWeight: 600 }}>
                     Workout History
                 </h3>
-                <span style={{ fontSize: 12, color: '#d4af37' }}>{entries.length} total</span>
+                <span style={{ fontSize: 12, color: 'var(--app-gold)' }}>{entries.length} total</span>
             </div>
 
             {loading ? (
-                <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 14 }}>Loading...</p>
+                <p style={{ color: 'var(--text-dim)', fontSize: 14 }}>Loading...</p>
             ) : entries.length === 0 ? (
                 <div style={{ textAlign: 'center', padding: '40px 0' }}>
                     <p style={{ fontSize: 32, marginBottom: 8 }}>🏋️</p>
-                    <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 14 }}>No workouts yet. Log your first one!</p>
+                    <p style={{ color: 'var(--text-dim)', fontSize: 14 }}>No workouts yet. Log your first one!</p>
                 </div>
             ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                     {entries.map(e => (
                         <div key={e.id} style={{
                             display: 'flex', alignItems: 'center', gap: 14, padding: 14,
-                            borderRadius: 12, background: 'rgba(255,255,255,0.03)',
-                            border: '1px solid rgba(255,255,255,0.06)', transition: 'all 0.2s',
+                            borderRadius: 12, background: 'var(--card-bg-subtle)',
+                            border: '1px solid var(--border-subtle)', transition: 'all 0.2s',
                         }}>
                             <div style={{
                                 width: 38, height: 38, borderRadius: 10, flexShrink: 0,
@@ -76,7 +76,7 @@ export default function FitnessList({ entries, loading, onDelete }: Props) {
                             <div style={{ flex: 1, minWidth: 0 }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
                                     <span style={{ fontWeight: 600, fontSize: 15 }}>{e.title}</span>
-                                    <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', flexShrink: 0, marginLeft: 12 }}>
+                                    <span style={{ fontSize: 12, color: 'var(--text-dim)', flexShrink: 0, marginLeft: 12 }}>
                                         {formatDate(e.date)}
                                     </span>
                                 </div>
@@ -89,15 +89,15 @@ export default function FitnessList({ entries, loading, onDelete }: Props) {
                                     }}>
                                         {e.type}
                                     </span>
-                                    <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>⏱ {e.duration} mins</span>
-                                    {e.notes && <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{e.notes}</span>}
+                                    <span style={{ fontSize: 12, color: 'var(--text-dim)' }}>⏱ {e.duration} mins</span>
+                                    {e.notes && <span style={{ fontSize: 12, color: 'var(--text-faint)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{e.notes}</span>}
                                 </div>
                             </div>
                             <button
                                 onClick={() => handleDelete(e.id)}
-                                style={{ background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.2)', cursor: 'pointer', fontSize: 14, padding: 4, flexShrink: 0 }}
+                                style={{ background: 'transparent', border: 'none', color: 'var(--text-faint)', cursor: 'pointer', fontSize: 14, padding: 4, flexShrink: 0 }}
                                 onMouseEnter={ev => (ev.currentTarget.style.color = '#ef4444')}
-                                onMouseLeave={ev => (ev.currentTarget.style.color = 'rgba(255,255,255,0.2)')}
+                                onMouseLeave={ev => (ev.currentTarget.style.color = 'var(--text-faint)')}
                             >
                                 ✕
                             </button>

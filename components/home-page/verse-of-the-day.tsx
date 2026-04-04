@@ -26,28 +26,28 @@ export default function VerseOfTheDay() {
 
     return (
         <div style={{
-            background: 'rgba(212,175,55,0.06)',
-            border: '1px solid rgba(212,175,55,0.2)',
+            background: 'var(--gold-card-bg)',
+            border: '1px solid var(--gold-border-faint)',
             borderRadius: 16,
             padding: 28,
             marginBottom: 32,
         }}>
-            <div style={{ fontSize: 12, color: '#d4af37', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 16 }}>
+            <div style={{ fontSize: 12, color: 'var(--app-gold)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 16 }}>
                 ✨ Verse of the Day
             </div>
             {loading ? (
-                <div style={{ height: 60, background: 'rgba(255,255,255,0.04)', borderRadius: 8, animation: 'pulse 2s infinite' }} />
+                <div style={{ height: 60, background: 'var(--card-bg)', borderRadius: 8, animation: 'pulse 2s infinite' }} />
             ) : verse ? (
                 <>
-                    <p style={{ fontSize: 18, lineHeight: 1.8, color: 'rgba(255,255,255,0.85)', margin: '0 0 16px', fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic' }}>
+                    <p style={{ fontSize: 18, lineHeight: 1.8, color: 'var(--text-strong)', margin: '0 0 16px', fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic' }}>
                         "{verse.text}"
                     </p>
-                    <p style={{ fontSize: 14, color: '#d4af37', margin: 0, fontWeight: 600 }}>
+                    <p style={{ fontSize: 14, color: 'var(--app-gold)', margin: 0, fontWeight: 600 }}>
                         — {verse.reference}
                     </p>
                 </>
             ) : (
-                <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: 14 }}>No verse available today.</p>
+                <p style={{ color: 'var(--text-dim)', fontSize: 14 }}>No verse available today.</p>
             )}
         </div>
     )

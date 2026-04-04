@@ -122,25 +122,25 @@ export default function SummaryCards() {
     ]
 
     return (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {cards.map((card, i) => (
                 <Link key={i} href={card.href} style={{ textDecoration: 'none' }}>
                     <div style={{
-                        background: card.gold ? 'rgba(212,175,55,0.08)' : 'rgba(255,255,255,0.04)',
-                        border: `1px solid ${card.gold ? 'rgba(212,175,55,0.25)' : 'rgba(255,255,255,0.08)'}`,
+                        background: card.gold ? 'var(--gold-card-bg)' : 'var(--card-bg)',
+                        border: `1px solid ${card.gold ? 'var(--gold-border-subtle)' : 'var(--border-default)'}`,
                         borderRadius: 16, padding: 24, cursor: 'pointer', transition: 'all 0.2s',
                     }}
-                        onMouseEnter={e => (e.currentTarget.style.border = `1px solid ${card.gold ? 'rgba(212,175,55,0.5)' : 'rgba(255,255,255,0.15)'}`)}
-                        onMouseLeave={e => (e.currentTarget.style.border = `1px solid ${card.gold ? 'rgba(212,175,55,0.25)' : 'rgba(255,255,255,0.08)'}`)}
+                        onMouseEnter={e => (e.currentTarget.style.border = `1px solid ${card.gold ? 'var(--gold-border)' : 'var(--border-medium)'}`)}
+                        onMouseLeave={e => (e.currentTarget.style.border = `1px solid ${card.gold ? 'var(--gold-border-subtle)' : 'var(--border-default)'}`)}
                     >
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
-                            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', fontWeight: 500 }}>{card.title}</span>
+                            <span style={{ fontSize: 13, color: 'var(--app-text-muted)', fontWeight: 500 }}>{card.title}</span>
                             <span style={{ fontSize: 22 }}>{card.icon}</span>
                         </div>
-                        <div style={{ fontSize: 20, fontWeight: 700, color: card.gold ? '#d4af37' : 'white', marginBottom: 6 }}>
+                        <div style={{ fontSize: 20, fontWeight: 700, color: card.gold ? 'var(--app-gold)' : 'var(--app-text)', marginBottom: 6 }}>
                             {loading ? '—' : card.primary}
                         </div>
-                        <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.3)' }}>
+                        <div style={{ fontSize: 13, color: 'var(--text-dim)' }}>
                             {loading ? '' : card.secondary}
                         </div>
                     </div>

@@ -16,7 +16,7 @@ function isLastThreeDays() {
 }
 
 function getTier(score: number) {
-    if (score >= 80) return { label: 'Warrior', emoji: '⚔️', color: '#d4af37', description: 'Exceptional month. You showed up and dominated.' }
+    if (score >= 80) return { label: 'Warrior', emoji: '⚔️', color: 'var(--app-gold)', description: 'Exceptional month. You showed up and dominated.' }
     if (score >= 60) return { label: 'Soldier', emoji: '🛡️', color: '#a8c5da', description: 'Solid effort. You stayed the course.' }
     if (score >= 40) return { label: 'Recruit', emoji: '🏹', color: '#c8a97e', description: 'You made progress. Keep building the habit.' }
     return { label: 'Apprentice', emoji: '🌱', color: '#7cb97e', description: 'Every warrior starts somewhere. Next month is yours.' }
@@ -112,8 +112,8 @@ export default function MonthlyReviewModal() {
             padding: 24,
         }}>
             <div style={{
-                background: '#0f0f1a',
-                border: '1px solid rgba(212,175,55,0.25)',
+                background: 'var(--card-bg)',
+                border: '1px solid var(--gold-border-subtle)',
                 borderRadius: 24,
                 padding: 40,
                 maxWidth: 520,
@@ -124,30 +124,30 @@ export default function MonthlyReviewModal() {
                 <button onClick={handleDismiss} style={{
                     position: 'absolute', top: 16, right: 16,
                     background: 'transparent', border: 'none',
-                    color: 'rgba(255,255,255,0.3)', cursor: 'pointer',
+                    color: 'var(--text-dim)', cursor: 'pointer',
                 }}>
                     <X size={20} />
                 </button>
 
                 {/* Header */}
-                <p style={{ fontSize: 12, color: '#d4af37', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 8px' }}>
+                <p style={{ fontSize: 12, color: 'var(--app-gold)', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 8px' }}>
                     Monthly Review — {monthName}
                 </p>
-                <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, color: 'white', margin: '0 0 4px' }}>
+                <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 36, fontWeight: 700, color: 'var(--app-text)', margin: '0 0 4px' }}>
                     {tier.emoji} {tier.label}
                 </h2>
-                <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 14, margin: '0 0 32px' }}>
+                <p style={{ color: 'var(--app-text-muted)', fontSize: 14, margin: '0 0 32px' }}>
                     {tier.description}
                 </p>
 
                 {/* Score */}
                 <div style={{
-                    background: 'rgba(212,175,55,0.06)',
-                    border: '1px solid rgba(212,175,55,0.15)',
+                    background: 'var(--gold-bg-subtle)',
+                    border: '1px solid var(--gold-border-faint)',
                     borderRadius: 14, padding: '16px 20px', marginBottom: 24,
                     display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 }}>
-                    <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>Overall score</span>
+                    <span style={{ fontSize: 13, color: 'var(--app-text-muted)' }}>Overall score</span>
                     <span style={{ fontSize: 28, fontWeight: 700, color: tier.color }}>{overallScore}%</span>
                 </div>
 
@@ -159,14 +159,14 @@ export default function MonthlyReviewModal() {
                 ].map(row => (
                     <div key={row.label} style={{ marginBottom: 16 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-                            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>{row.label}</span>
-                            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>{row.value}</span>
+                            <span style={{ fontSize: 13, color: 'var(--text-soft)' }}>{row.label}</span>
+                            <span style={{ fontSize: 13, color: 'var(--text-dim)' }}>{row.value}</span>
                         </div>
-                        <div style={{ height: 4, background: 'rgba(255,255,255,0.06)', borderRadius: 4 }}>
+                        <div style={{ height: 4, background: 'var(--border-default)', borderRadius: 4 }}>
                             <div style={{
                                 height: '100%', borderRadius: 4,
                                 width: `${row.score}%`,
-                                background: row.score >= 80 ? '#d4af37' : row.score >= 60 ? '#a8c5da' : '#c8a97e',
+                                background: row.score >= 80 ? 'var(--app-gold)' : row.score >= 60 ? '#a8c5da' : '#c8a97e',
                                 transition: 'width 0.8s ease',
                             }} />
                         </div>
@@ -177,15 +177,15 @@ export default function MonthlyReviewModal() {
                 <div style={{ display: 'flex', gap: 10, marginTop: 32 }}>
                     <button onClick={handleDismiss} style={{
                         flex: 1, padding: '11px 0', borderRadius: 12, fontSize: 14,
-                        background: 'transparent', border: '1px solid rgba(255,255,255,0.1)',
-                        color: 'rgba(255,255,255,0.4)', cursor: 'pointer',
+                        background: 'transparent', border: '1px solid var(--border-medium)',
+                        color: 'var(--text-dim)', cursor: 'pointer',
                     }}>
                         Dismiss
                     </button>
                     <button onClick={handleSendEmail} disabled={sending || sent} style={{
                         flex: 2, padding: '11px 0', borderRadius: 12, fontSize: 14,
-                        background: 'rgba(212,175,55,0.12)', border: '1px solid rgba(212,175,55,0.3)',
-                        color: '#d4af37', fontWeight: 600, cursor: 'pointer',
+                        background: 'var(--gold-bg-medium)', border: '1px solid var(--gold-border)',
+                        color: 'var(--app-gold)', fontWeight: 600, cursor: 'pointer',
                         display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                         opacity: sending || sent ? 0.6 : 1,
                     }}>

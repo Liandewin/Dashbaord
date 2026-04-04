@@ -22,8 +22,8 @@ export default function FitnessChart({ entries }: Props) {
 
     return (
         <div style={{
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: 'var(--card-bg)',
+            border: '1px solid var(--border-default)',
             borderRadius: 16,
             padding: 24,
             marginBottom: 24,
@@ -33,15 +33,15 @@ export default function FitnessChart({ entries }: Props) {
             </h3>
             <ResponsiveContainer width="100%" height={200}>
                 <BarChart data={last7Days} barSize={28}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                    <XAxis dataKey="day" tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 12 }} axisLine={false} tickLine={false} />
-                    <YAxis tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 12 }} axisLine={false} tickLine={false} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--border-subtle)" />
+                    <XAxis dataKey="day" tick={{ fill: 'var(--text-dim)', fontSize: 12 }} axisLine={false} tickLine={false} />
+                    <YAxis tick={{ fill: 'var(--text-dim)', fontSize: 12 }} axisLine={false} tickLine={false} />
                     <Tooltip
-                        contentStyle={{ background: '#1a1a2e', border: '1px solid rgba(212,175,55,0.2)', borderRadius: 10, color: 'white' }}
-                        cursor={{ fill: 'rgba(255,255,255,0.04)' }}
+                        contentStyle={{ background: 'var(--card-bg)', border: '1px solid var(--gold-border-faint)', borderRadius: 10, color: 'var(--app-text)' }}
+                        cursor={{ fill: 'var(--card-bg-hover)' }}
                         formatter={(value: any) => [`${value} mins`, 'Duration']}
                     />
-                    <Bar dataKey="minutes" fill="rgba(212,175,55,0.6)" radius={[6, 6, 0, 0]} />
+                    <Bar dataKey="minutes" fill="var(--app-gold)" radius={[6, 6, 0, 0]} />
                 </BarChart>
             </ResponsiveContainer>
         </div>
