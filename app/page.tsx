@@ -258,7 +258,7 @@ export default function LandingPage() {
       {floatingCards.map((card, i) => (
         <div
           key={i}
-          className={`absolute z-20 hidden lg:block ${i % 3 === 0 ? 'float-a' : i % 3 === 1 ? 'float-b' : 'float-c'} ${card.type === 'scripture' ? 'card-scripture' : 'card-quote'} rounded-2xl p-4 max-w-[220px] fade-in-up`}
+          className={`absolute z-20 hidden 2xl:block ${i % 3 === 0 ? 'float-a' : i % 3 === 1 ? 'float-b' : 'float-c'} ${card.type === 'scripture' ? 'card-scripture' : 'card-quote'} rounded-2xl p-4 max-w-[200px] fade-in-up`}
           style={{
             ...card.position,
             animationDelay: card.delay,

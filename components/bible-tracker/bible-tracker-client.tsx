@@ -7,7 +7,6 @@ import StatsCards from '@/components/bible-tracker/stats-cards'
 import ProgressChart from '@/components/bible-tracker/progress-chart'
 import RecentReadings from '@/components/bible-tracker/recent-readings'
 import LogReadingForm from '@/components/bible-tracker/log-reading-form'
-import { WelcomeHeader } from '@/components/bible-tracker/welcome-header'
 
 export default function BibleTrackerPage() {
     const supabase = createSupabaseBrowserClient()
@@ -41,7 +40,6 @@ export default function BibleTrackerPage() {
         <div className="page-padding" style={{
             minHeight: '100vh',
             background: 'var(--app-bg)',
-
             fontFamily: "'DM Sans', sans-serif",
             color: 'var(--app-text)',
         }}>
@@ -135,7 +133,18 @@ export default function BibleTrackerPage() {
         .fade-in { animation: fadeInUp 0.5s ease forwards; }
       `}</style>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 24 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 32 }}>
+                <div>
+                    <h1 style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: 42, fontWeight: 700, margin: 0, lineHeight: 1.1, color: 'var(--app-text)',
+                    }}>
+                        Bible <span style={{ color: 'var(--app-gold)' }}>Tracker</span>
+                    </h1>
+                    <p style={{ color: 'var(--app-text-muted)', marginTop: 6, fontSize: 14 }}>
+                        Track your daily reading and build a lasting streak
+                    </p>
+                </div>
                 <button className="btn-gold" onClick={() => setShowForm(!showForm)}>
                     + Log Reading
                 </button>
