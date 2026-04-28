@@ -25,7 +25,7 @@ async function buildAndSend(supabase: any, profileId: string, email: string, fir
     const monthName = prev.toLocaleString('default', { month: 'long' })
 
     const [bible, goals, fitness] = await Promise.all([
-        supabase.from('bible_readings').select('id').gte('date', monthStart).eq('user_id', profileId),
+        supabase.from('bible_reading').select('id').gte('date', monthStart).eq('user_id', profileId),
         supabase.from('goals').select('status').eq('user_id', profileId),
         supabase.from('fitness').select('id').gte('date', monthStart).eq('user_id', profileId),
     ])
@@ -66,9 +66,19 @@ export async function POST() {
         .single()
 
     if (!profile) return NextResponse.json({ error: 'Profile not found' }, { status: 404 })
+    if (!profile.email) return NextResponse.json({ error: 'No email on profile' }, { status: 400 })
 
-    await buildAndSend(supabase, user.id, profile.email, profile.first_name || 'Friend')
-    return NextResponse.json({ sent: true })
+    try {
+        const result = await buildAndSend(supabase, user.id, profile.email, profile.first_name || 'Friend')
+        if (result.error) {
+            console.error('[send-monthly] Resend error:', result.error)
+            return NextResponse.json({ error: result.error.message || 'Email send failed' }, { status: 500 })
+        }
+        return NextResponse.json({ sent: true })
+    } catch (err: any) {
+        console.error('[send-monthly] Unexpected error:', err)
+        return NextResponse.json({ error: err?.message || 'Unexpected error' }, { status: 500 })
+    }
 }
 
 // GET — triggered by Vercel cron on the last day of the month
