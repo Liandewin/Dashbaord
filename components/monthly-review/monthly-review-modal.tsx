@@ -3,16 +3,20 @@
 import { useState, useEffect } from 'react'
 import { createSupabaseBrowserClient } from '@/lib/supabase-browser'
 import { X, Send } from 'lucide-react'
+import { Toast } from '@/components/ui/toast'
 
-function getMonthKey() {
+function getReviewedMonth() {
     const now = new Date()
-    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
+    return new Date(now.getFullYear(), now.getMonth() - 1, 1)
 }
 
-function isLastThreeDays() {
-    const now = new Date()
-    const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate()
-    return now.getDate() >= lastDay - 2
+function getReviewedMonthKey() {
+    const prev = getReviewedMonth()
+    return `${prev.getFullYear()}-${String(prev.getMonth() + 1).padStart(2, '0')}`
+}
+
+function isFirstThreeDays() {
+    return new Date().getDate() <= 3
 }
 
 function getTier(score: number) {
@@ -37,12 +41,13 @@ export default function MonthlyReviewModal() {
     const [stats, setStats] = useState<Stats | null>(null)
     const [sending, setSending] = useState(false)
     const [sent, setSent] = useState(false)
+    const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null)
 
     useEffect(() => {
         async function check() {
-            if (!isLastThreeDays()) return
+            if (!isFirstThreeDays()) return
 
-            const monthKey = getMonthKey()
+            const monthKey = getReviewedMonthKey()
 
             // Check if already dismissed this month
             const { data } = await supabase
@@ -53,15 +58,16 @@ export default function MonthlyReviewModal() {
 
             if (data) return // already seen
 
-            // Fetch stats for this month
-            const now = new Date()
-            const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0]
-            const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate()
+            // Fetch stats for the previous (reviewed) month
+            const prev = getReviewedMonth()
+            const monthStart = new Date(prev.getFullYear(), prev.getMonth(), 1).toISOString().split('T')[0]
+            const daysInMonth = new Date(prev.getFullYear(), prev.getMonth() + 1, 0).getDate()
+            const monthEnd = new Date(prev.getFullYear(), prev.getMonth() + 1, 0).toISOString().split('T')[0]
 
             const [bible, goals, fitness] = await Promise.all([
-                supabase.from('bible_readings').select('id').gte('date', monthStart),
+                supabase.from('bible_reading').select('id').gte('date', monthStart).lte('date', monthEnd),
                 supabase.from('goals').select('status'),
-                supabase.from('fitness').select('id').gte('date', monthStart),
+                supabase.from('fitness').select('id').gte('date', monthStart).lte('date', monthEnd),
             ])
 
             setStats({
@@ -79,22 +85,39 @@ export default function MonthlyReviewModal() {
         check()
     }, [])
 
+    function showToast(message: string, type: 'success' | 'error') {
+        setToast({ message, type })
+        setTimeout(() => setToast(null), 3500)
+    }
+
     async function handleDismiss() {
         await supabase.from('monthly_summaries').insert({
-            month: getMonthKey(),
+            month: getReviewedMonthKey(),
         })
         setShow(false)
     }
 
     async function handleSendEmail() {
         setSending(true)
-        await fetch('/api/send-monthly', { method: 'POST' })
-        await handleDismiss()
-        setSent(true)
-        setSending(false)
+        try {
+            const res = await fetch('/api/send-monthly', { method: 'POST' })
+            if (!res.ok) {
+                const body = await res.json().catch(() => ({}))
+                throw new Error(body.error || `Request failed (${res.status})`)
+            }
+            await handleDismiss()
+            setSent(true)
+            showToast('Monthly review sent to your inbox', 'success')
+        } catch (err: any) {
+            showToast(err?.message || 'Failed to send email', 'error')
+        } finally {
+            setSending(false)
+        }
     }
 
-    if (!show || !stats) return null
+    if (!show || !stats) {
+        return toast ? <Toast message={toast.message} type={toast.type} /> : null
+    }
 
     const bibleScore = Math.min((stats.bibleChapters / stats.daysInMonth) * 100, 100)
     const goalsScore = stats.totalGoals === 0 ? 100 : (stats.goalsCompleted / stats.totalGoals) * 100
@@ -102,9 +125,11 @@ export default function MonthlyReviewModal() {
     const overallScore = Math.round((bibleScore + goalsScore + fitnessScore) / 3)
     const tier = getTier(overallScore)
 
-    const monthName = new Date().toLocaleString('default', { month: 'long' })
+    const monthName = getReviewedMonth().toLocaleString('default', { month: 'long' })
 
     return (
+        <>
+        {toast && <Toast message={toast.message} type={toast.type} />}
         <div style={{
             position: 'fixed', inset: 0, zIndex: 50,
             background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)',
@@ -195,5 +220,6 @@ export default function MonthlyReviewModal() {
                 </div>
             </div>
         </div>
+        </>
     )
 }
