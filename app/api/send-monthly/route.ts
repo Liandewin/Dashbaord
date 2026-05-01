@@ -5,11 +5,6 @@ import MonthlyReviewEmail from '@/app/email/monthly-review'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-function getMonthKey() {
-    const now = new Date()
-    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
-}
-
 function getTier(score: number) {
     if (score >= 80) return { label: 'Warrior', emoji: '⚔️' }
     if (score >= 60) return { label: 'Soldier', emoji: '🛡️' }
@@ -24,10 +19,12 @@ async function buildAndSend(supabase: any, profileId: string, email: string, fir
     const daysInMonth = new Date(prev.getFullYear(), prev.getMonth() + 1, 0).getDate()
     const monthName = prev.toLocaleString('default', { month: 'long' })
 
+    const monthEnd = new Date(prev.getFullYear(), prev.getMonth() + 1, 0).toISOString().split('T')[0]
+
     const [bible, goals, fitness] = await Promise.all([
-        supabase.from('bible_readings').select('id').gte('date', monthStart).eq('user_id', profileId),
+        supabase.from('bible_reading').select('id').gte('date', monthStart).lte('date', monthEnd).eq('user_id', profileId),
         supabase.from('goals').select('status').eq('user_id', profileId),
-        supabase.from('fitness').select('id').gte('date', monthStart).eq('user_id', profileId),
+        supabase.from('fitness').select('id').gte('date', monthStart).lte('date', monthEnd).eq('user_id', profileId),
     ])
 
     const bibleChapters = bible.data?.length ?? 0
@@ -65,9 +62,13 @@ export async function POST() {
         .eq('id', user.id)
         .single()
 
-    if (!profile) return NextResponse.json({ error: 'Profile not found' }, { status: 404 })
+    const recipient = profile?.email || user.email
+    if (!recipient) return NextResponse.json({ error: 'No email on file' }, { status: 400 })
 
-    await buildAndSend(supabase, user.id, profile.email, profile.first_name || 'Friend')
+    const result = await buildAndSend(supabase, user.id, recipient, profile?.first_name || 'Friend')
+    if (result.error) {
+        return NextResponse.json({ error: result.error.message }, { status: 500 })
+    }
     return NextResponse.json({ sent: true })
 }
 
