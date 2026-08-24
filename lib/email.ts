@@ -6,6 +6,10 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 export const EMAIL_FROM = 'Faith & Growth Tracker <noreply@faith-growth-tracker.co.za>'
 
+// Where user-submitted feedback is delivered. Overridable without a redeploy so
+// the address can change without touching source.
+export const FEEDBACK_TO = process.env.FEEDBACK_TO_EMAIL || 'liandewinnaar33@gmail.com'
+
 // Resend's default account limit is 2 requests per second. The cron routes fan
 // out over every profile at once, so sending them all in parallel means most
 // come back 429 rate_limit_exceeded.
@@ -16,6 +20,7 @@ export type EmailPayload = {
     to: string
     subject: string
     react: ReactElement
+    replyTo?: string
 }
 
 export type SendReport = {

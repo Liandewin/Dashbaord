@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/nextjs'
 import { createSupabaseServerClient } from '@/lib/supabase-server'
 import { NextRequest, NextResponse } from 'next/server'
 import FeedbackNotificationEmail from '@/app/email/feedback-notification'
-import { EMAIL_FROM, sendEmail } from '@/lib/email'
+import { EMAIL_FROM, FEEDBACK_TO, sendEmail } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
     const supabase = await createSupabaseServerClient()
@@ -27,19 +27,17 @@ export async function POST(request: NextRequest) {
 
     // The feedback row is already saved, so a failed notification must not fail
     // the request — but it must not vanish silently either.
-    const recipient = process.env.FEEDBACK_TO_EMAIL || user.email
-    if (recipient) {
-        try {
-            await sendEmail({
-                from: EMAIL_FROM,
-                to: recipient,
-                subject: '💬 New Feedback Received',
-                react: FeedbackNotificationEmail({ name, message }),
-            })
-        } catch (error) {
-            console.error('[send-feedback] notification failed', error)
-            Sentry.captureException(error, { extra: { route: 'send-feedback' } })
-        }
+    try {
+        await sendEmail({
+            from: EMAIL_FROM,
+            to: FEEDBACK_TO,
+            replyTo: user.email,
+            subject: `💬 New feedback from ${name}`,
+            react: FeedbackNotificationEmail({ name, message }),
+        })
+    } catch (error) {
+        console.error('[send-feedback] notification failed', error)
+        Sentry.captureException(error, { extra: { route: 'send-feedback', name } })
     }
 
     return NextResponse.json({ success: true })
