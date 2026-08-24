@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { StatGrid } from './stat-grid'
 
 interface Props {
     firstName: string
@@ -30,8 +31,8 @@ export default function WeeklySummaryEmail({
             <h1 style={{ color: '#d4af37', fontSize: 28, marginBottom: 8 }}>Your weekly recap, {firstName} 📊</h1>
             <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15, marginBottom: 32 }}>Here's how you grew this week</p>
 
-            {/* Stats Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 32 }}>
+            {/* Stats grid — table-based so it survives Gmail and Outlook. */}
+            <StatGrid columns={2} gutter={16} style={{ marginBottom: 32 }}>
                 <div style={{ background: 'rgba(212,175,55,0.08)', border: '1px solid rgba(212,175,55,0.2)', borderRadius: 12, padding: 20 }}>
                     <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 8px' }}>📖 Bible</p>
                     <p style={{ fontSize: 28, fontWeight: 700, color: '#d4af37', margin: '0 0 4px' }}>{bibleReadings}</p>
@@ -52,7 +53,7 @@ export default function WeeklySummaryEmail({
                     <p style={{ fontSize: 28, fontWeight: 700, color: 'white', margin: '0 0 4px' }}>{workouts}</p>
                     <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', margin: 0 }}>{workoutMinutes} mins logged</p>
                 </div>
-            </div>
+            </StatGrid>
 
             {/* Goals */}
             <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, padding: 20, marginBottom: 32 }}>
