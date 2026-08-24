@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { EmailButton } from './button'
 
 interface Props {
     firstName: string
@@ -21,9 +22,7 @@ export default function DailyCheckinEmail({ firstName, verse, reference }: Props
                 Take a moment today to log your Bible reading, say a prayer, or write in your journal. Small steps build big faith. 💪
             </p>
 
-            <a href="https://faith-growth-tracker.vercel.app/" style={{ background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.3)', color: '#d4af37', padding: '12px 24px', borderRadius: 10, textDecoration: 'none', fontWeight: 600, fontSize: 14 }}>
-                Open my dashboard →
-            </a>
+            <EmailButton href="https://faith-growth-tracker.vercel.app/" label="Open my dashboard →" />
 
             <p style={{ color: 'rgba(255,255,255,0.2)', fontSize: 12, marginTop: 40 }}>
                 You're receiving this because you signed up for Faith & Growth Tracker.
