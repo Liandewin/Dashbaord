@@ -1,16 +1,14 @@
-import { Resend } from 'resend'
 import { createSupabaseServiceClient } from '@/lib/supabase-server'
 import { NextRequest, NextResponse } from 'next/server'
 import WeeklySummaryEmail from '@/app/email/weekly-summary'
-
-const resend = new Resend(process.env.RESEND_API_KEY)
+import { EMAIL_FROM, sendToAll, withEmail } from '@/lib/email'
 
 export async function GET(request: NextRequest) {
     const authHeader = request.headers.get('authorization')
     if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
-    
+
     const supabase = createSupabaseServiceClient()
 
     const { data: profiles, error } = await supabase
@@ -21,13 +19,17 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ error: 'Failed to fetch profiles' }, { status: 500 })
     }
 
+    const recipients = withEmail(profiles)
+    const skipped = profiles.length - recipients.length
+
     const now = new Date()
     const startOfWeek = new Date(now)
     startOfWeek.setDate(now.getDate() - 7)
     const startOfWeekStr = startOfWeek.toISOString().split('T')[0]
 
-    const results = await Promise.all(
-        profiles.map(async profile => {
+    const report = await sendToAll(
+        recipients,
+        async profile => {
             const [bible, prayers, journal, goals, fitness] = await Promise.all([
                 supabase.from('bible_reading').select('date').gte('date', startOfWeekStr).eq('user_id', profile.id),
                 supabase.from('prayer_log').select('answered').gte('date', startOfWeekStr).eq('user_id', profile.id),
@@ -52,8 +54,8 @@ export async function GET(request: NextRequest) {
             const completedGoals = (goals.data || []).filter((g: any) => g.status === 'done').length
             const workoutMinutes = (fitness.data || []).reduce((acc: number, e: any) => acc + e.duration, 0)
 
-            return resend.emails.send({
-                from: 'Faith & Growth Tracker <noreply@faith-growth-tracker.co.za>',
+            return {
+                from: EMAIL_FROM,
                 to: profile.email,
                 subject: '📊 Your weekly growth summary',
                 react: WeeklySummaryEmail({
@@ -68,9 +70,10 @@ export async function GET(request: NextRequest) {
                     workouts: fitness.data?.length || 0,
                     workoutMinutes,
                 }),
-            })
-        })
+            }
+        },
+        'send-weekly'
     )
 
-    return NextResponse.json({ sent: results.length })
+    return NextResponse.json({ ...report, skipped })
 }

@@ -1,9 +1,7 @@
-import { Resend } from 'resend'
 import { createSupabaseServerClient, createSupabaseServiceClient } from '@/lib/supabase-server'
 import { NextRequest, NextResponse } from 'next/server'
 import MonthlyReviewEmail from '@/app/email/monthly-review'
-
-const resend = new Resend(process.env.RESEND_API_KEY)
+import { EMAIL_FROM, EmailPayload, sendEmail, sendToAll, withEmail } from '@/lib/email'
 
 function getTier(score: number) {
     if (score >= 80) return { label: 'Warrior', emoji: '⚔️' }
@@ -12,7 +10,12 @@ function getTier(score: number) {
     return { label: 'Apprentice', emoji: '🌱' }
 }
 
-async function buildAndSend(supabase: any, profileId: string, email: string, firstName: string) {
+async function buildPayload(
+    supabase: any,
+    profileId: string,
+    email: string,
+    firstName: string
+): Promise<EmailPayload> {
     const now = new Date()
     const prev = new Date(now.getFullYear(), now.getMonth() - 1, 1)
     const monthStart = prev.toISOString().split('T')[0]
@@ -38,15 +41,15 @@ async function buildAndSend(supabase: any, profileId: string, email: string, fir
     const overallScore = Math.round((bibleScore + goalsScore + fitnessScore) / 3)
     const tier = getTier(overallScore)
 
-    return resend.emails.send({
-        from: 'Faith & Growth Tracker <noreply@faith-growth-tracker.co.za>',
+    return {
+        from: EMAIL_FROM,
         to: email,
         subject: `${tier.emoji} Your ${monthName} review — ${tier.label}`,
         react: MonthlyReviewEmail({
             firstName, monthName, tier: tier.label, tierEmoji: tier.emoji,
             overallScore, bibleChapters, daysInMonth, goalsCompleted, totalGoals, workouts,
         }),
-    })
+    }
 }
 
 // POST — triggered by the "Send to my email" button in the modal
@@ -65,27 +68,41 @@ export async function POST() {
     const recipient = profile?.email || user.email
     if (!recipient) return NextResponse.json({ error: 'No email on file' }, { status: 400 })
 
-    const result = await buildAndSend(supabase, user.id, recipient, profile?.first_name || 'Friend')
-    if (result.error) {
-        return NextResponse.json({ error: result.error.message }, { status: 500 })
+    try {
+        const payload = await buildPayload(supabase, user.id, recipient, profile?.first_name || 'Friend')
+        await sendEmail(payload)
+    } catch (error) {
+        return NextResponse.json(
+            { error: error instanceof Error ? error.message : 'Failed to send email' },
+            { status: 500 }
+        )
     }
+
     return NextResponse.json({ sent: true })
 }
 
-// GET — triggered by Vercel cron on the last day of the month
+// GET — triggered by Vercel cron on the 1st of the month
 export async function GET(request: NextRequest) {
     const authHeader = request.headers.get('authorization')
     if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const supabase = await createSupabaseServiceClient()
-    const { data: profiles } = await supabase.from('profiles').select('id, first_name, email')
-    if (!profiles) return NextResponse.json({ error: 'No profiles' }, { status: 500 })
+    const supabase = createSupabaseServiceClient()
+    const { data: profiles, error } = await supabase.from('profiles').select('id, first_name, email')
 
-    await Promise.all(
-        profiles.map(p => buildAndSend(supabase, p.id, p.email, p.first_name || 'Friend'))
+    if (error || !profiles) {
+        return NextResponse.json({ error: 'Failed to fetch profiles' }, { status: 500 })
+    }
+
+    const recipients = withEmail(profiles)
+    const skipped = profiles.length - recipients.length
+
+    const report = await sendToAll(
+        recipients,
+        profile => buildPayload(supabase, profile.id, profile.email, profile.first_name || 'Friend'),
+        'send-monthly'
     )
 
-    return NextResponse.json({ sent: profiles.length })
+    return NextResponse.json({ ...report, skipped })
 }

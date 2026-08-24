@@ -68,7 +68,7 @@ export default function WeeklySummaryEmail({
                 </p>
             </div>
 
-            <a href="https://your-app-url.vercel.app/dashboard" style={{ background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.3)', color: '#d4af37', padding: '12px 24px', borderRadius: 10, textDecoration: 'none', fontWeight: 600, fontSize: 14 }}>
+            <a href="https://faith-growth-tracker.vercel.app/dashboard" style={{ background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.3)', color: '#d4af37', padding: '12px 24px', borderRadius: 10, textDecoration: 'none', fontWeight: 600, fontSize: 14 }}>
                 Open my dashboard →
             </a>
 
