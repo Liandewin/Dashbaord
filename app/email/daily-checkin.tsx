@@ -22,7 +22,7 @@ export default function DailyCheckinEmail({ firstName, verse, reference }: Props
                 Take a moment today to log your Bible reading, say a prayer, or write in your journal. Small steps build big faith. 💪
             </p>
 
-            <EmailButton href="https://faith-growth-tracker.vercel.app/" label="Open my dashboard →" />
+            <EmailButton href="https://faith-growth-tracker.vercel.app/dashboard" label="Open my dashboard →" />
 
             <p style={{ color: 'rgba(255,255,255,0.2)', fontSize: 12, marginTop: 40 }}>
                 You're receiving this because you signed up for Faith & Growth Tracker.
